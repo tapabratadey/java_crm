@@ -2,7 +2,11 @@ package controller;
 
 import db.DBConnection;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.FileWriter;
@@ -11,9 +15,12 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import db.DBConnection;
+import javafx.stage.Stage;
+
 import java.sql.*;
 
 public class Login implements Initializable {
@@ -24,6 +31,7 @@ public class Login implements Initializable {
     public Label passwordTextLabel;
     public String loggedUser;
     public Button loginButton;
+    public Label loginHeader;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,8 +42,9 @@ public class Login implements Initializable {
         usernameTextLabel.setText(userLang.getString("username"));
         passwordTextLabel.setText(userLang.getString("password"));
         loginButton.setText(userLang.getString("loginButton"));
+        loginHeader.setText(userLang.getString("loginHeader"));
     }
-    public void loginButton(ActionEvent actionEvent){
+    public void loginButton(ActionEvent actionEvent) throws IOException {
         String username = usernameText.getText();
         String password = passwordText.getText();
         boolean isLogged = tryLogin(username, password);
@@ -45,14 +54,13 @@ public class Login implements Initializable {
             /**
             * AddAppointment newUser = new AddAppointmnent();
             * newUser.setUserId(loggedUser);
-    *         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Dashboard.fxml")));
-    *         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-    *         Scene scene = new Scene(root);
-    *         stage.setTitle("Dashboard");
-    *         stage.setScene(scene);
-    *         stage.show();
-             *
             */
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
+            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Dashboard");
+            stage.setScene(scene);
+            stage.show();
             userLogInTracker(loggedUser, true);
         }else{
             System.out.println("login failed");

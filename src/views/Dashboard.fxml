@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.Dashboard"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Dashboard">
+   <children>
+      <Button fx:id="logOutButtonText" layoutX="515.0" layoutY="34.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="27.0" prefWidth="62.0" text="Log Out" />
+      <Button fx:id="viewAppointmentsText" layoutX="157.0" layoutY="179.0" mnemonicParsing="false" onAction="#viewAppointmentButton" prefHeight="42.0" prefWidth="287.0" text="View/Schedule Appointments" />
+      <Button fx:id="viewReportsText" layoutX="157.0" layoutY="267.0" mnemonicParsing="false" onAction="#viewReportsButton" prefHeight="42.0" prefWidth="287.0" text="View Reports" />
+      <Button fx:id="viewCustomersText" layoutX="157.0" layoutY="85.0" mnemonicParsing="false" onAction="#viewCustomersButton" prefHeight="42.0" prefWidth="287.0" text="View Customers" />
+      <Label fx:id="dashboardHeader" layoutX="255.0" layoutY="21.0" prefHeight="27.0" prefWidth="91.0" text="Dashboard">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+   </children>
 </AnchorPane>

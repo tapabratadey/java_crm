@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
    <children>
@@ -9,8 +10,14 @@
       <TextField fx:id="passwordText" layoutX="216.0" layoutY="182.0" />
       <Label fx:id="usernameTextLabel" layoutX="216.0" layoutY="111.0" text="Username" />
       <Label fx:id="passwordTextLabel" layoutX="216.0" layoutY="165.0" text="Password" />
-      <Button fx:id="loginButton" layoutX="265.0" layoutY="235.0"
-              mnemonicParsing="false" onAction="#loginButton" text="Login" />
+      <Button fx:id="loginButton" layoutX="265.0" layoutY="235.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
       <Label fx:id="welcomeMsg" layoutX="257.0" layoutY="83.0" text="Please log in" />
+      <Label fx:id="loginHeader" layoutX="242.0" layoutY="26.0"
+             prefHeight="25.0"
+             prefWidth="116.0" text="Scheduler">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
