@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import db.DBConnection;
 import javafx.stage.Stage;
-
+import java.time.*;
 import java.sql.*;
 
 public class Login implements Initializable {
@@ -32,6 +32,8 @@ public class Login implements Initializable {
     public String loggedUser;
     public Button loginButton;
     public Label loginHeader;
+    public Label getZone;
+    public Label zoneLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,7 +45,16 @@ public class Login implements Initializable {
         passwordTextLabel.setText(userLang.getString("password"));
         loginButton.setText(userLang.getString("loginButton"));
         loginHeader.setText(userLang.getString("loginHeader"));
+        zoneLabel.setText(userLang.getString("zone"));
+        getZone.setText(findZone());
     }
+
+    private String findZone() {
+        String location;
+        ZoneId zone = ZoneId.systemDefault();
+        return zone.toString();
+    }
+
     public void loginButton(ActionEvent actionEvent) throws IOException {
         String username = usernameText.getText();
         String password = passwordText.getText();
@@ -52,7 +63,7 @@ public class Login implements Initializable {
             loggedUser = username;
             System.out.println("User: " + loggedUser + " logged in.");
             /**
-            * AddAppointment newUser = new AddAppointmnent();
+            * AddAppointment newUser = new AddAppointment();
             * newUser.setUserId(loggedUser);
             */
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));

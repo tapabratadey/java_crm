@@ -1,34 +1,82 @@
 package dbAccess;
 
 import db.DBConnection;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Countries;
+import model.Country;
 
 import java.sql.*;
 
 public class DBCountries {
-    public static ObservableList<Countries> getAllCountries(){
-        ObservableList<Countries> countryList = FXCollections.observableArrayList();
+    public static ObservableList<String> getAllCountries(){
+        ObservableList<String> countryList = FXCollections.observableArrayList();
         try{
-            String sql = "SELECT * from countries";
+            String sql = "select * from countries";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                int countryId = rs.getInt("Country_ID");
-                String countryName = rs.getString("Country");
-                Countries country = new Countries(countryId, countryName);
-                countryList.add(country);
+                Country country = new Country();
+                country.setName(rs.getString("Country"));
+//                country.setDivisionId(rs.getInt("Division_ID"));
+                countryList.add(country.getName());
             }
         }catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-
-
         return countryList;
     }
 
-    public static void checkDateConversion(){
+    public static ObservableList<String> getUSRegions(){
+        ObservableList<String> divisionList = FXCollections.observableArrayList();
+        try{
+            String sql = "select * from first_level_divisions where COUNTRY_ID = 1";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Country region = new Country();
+                region.setDivision(rs.getString("Division"));
+                divisionList.add(region.getDivision());
+            }
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return divisionList;
+    }
+    public static ObservableList<String> getUKRegions(){
+        ObservableList<String> divisionList = FXCollections.observableArrayList();
+        try{
+            String sql = "select * from first_level_divisions where COUNTRY_ID = 2";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Country ukRegions = new Country();
+                ukRegions.setDivision(rs.getString("Division"));
+                divisionList.add(ukRegions.getDivision());
+            }
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return divisionList;
+    }
+    public static ObservableList<String> getCARegions(){
+        ObservableList<String> divisionList = FXCollections.observableArrayList();
+        try{
+            String sql = "select * from first_level_divisions where COUNTRY_ID = 3";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Country caRegions = new Country();
+                caRegions.setDivision(rs.getString("Division"));
+                divisionList.add(caRegions.getDivision());
+            }
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return divisionList;
+    }
+
+    /*public static void checkDateConversion(){
         System.out.println("CREATE DATE FIRST");
         String sql = "select Create_Date from countries";
         try{
@@ -38,8 +86,8 @@ public class DBCountries {
                 Timestamp ts = rs.getTimestamp("Create_Date");
                 System.out.println("CD: " + ts.toLocalDateTime().toString());
             }
-        }catch(SQLException throwables){
-            throwables.printStackTrace();
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
         }
-    }
+    }*/
 }

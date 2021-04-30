@@ -11,13 +11,13 @@
       <Label fx:id="usernameTextLabel" layoutX="216.0" layoutY="111.0" text="Username" />
       <Label fx:id="passwordTextLabel" layoutX="216.0" layoutY="165.0" text="Password" />
       <Button fx:id="loginButton" layoutX="265.0" layoutY="235.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
-      <Label fx:id="welcomeMsg" layoutX="257.0" layoutY="83.0" text="Please log in" />
-      <Label fx:id="loginHeader" layoutX="242.0" layoutY="26.0"
-             prefHeight="25.0"
-             prefWidth="116.0" text="Scheduler">
+      <Label fx:id="welcomeMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="83.0" prefHeight="17.0" prefWidth="149.0" text="Please log in" />
+      <Label fx:id="loginHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="34.0" prefHeight="32.0" prefWidth="149.0" text="Scheduler">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="zoneLabel" layoutX="216.0" layoutY="274.0" text="Zone:" />
+      <Label fx:id="getZone" layoutX="252.0" layoutY="274.0" prefHeight="17.0" prefWidth="116.0" text="Label" />
    </children>
 </AnchorPane>
