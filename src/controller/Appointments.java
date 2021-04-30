@@ -1,5 +1,6 @@
 package controller;
 
+import model.Appointment;
 import dbAccess.DBAppointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -39,17 +40,16 @@ public class Appointments implements Initializable {
     }
 
     public void setupAppointments(){
-        DBAppointments appointments = new DBAppointments();
-        appointmentTable.setItems(appointments.getAppointments());
+        appointmentTable.setItems(DBAppointments.getAppointments());
         appointmentId.setCellValueFactory(new PropertyValueFactory<>("id"));
         appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("description"));
-        appointmentDescription.setCellValueFactory(new PropertyValueFactory<>("location"));
-        appointmentContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        appointmentType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        appointmentEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        appointmentDescription.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        appointmentLocation.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        appointmentContact.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+        appointmentType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        appointmentStartTime.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
+        appointmentEndTime.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+        appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomerId"));
     }
 
     public void scheduleAppointmentButton(ActionEvent actionEvent) throws IOException {
@@ -95,6 +95,4 @@ public class Appointments implements Initializable {
             stage.show();
         }
     }
-
-
 }

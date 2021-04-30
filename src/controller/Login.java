@@ -111,7 +111,7 @@ public class Login implements Initializable {
             FileWriter fileToWrite = new FileWriter("login_activity.txt", true);
             PrintWriter writeToFile = new PrintWriter(fileToWrite);
             LocalDateTime timeAtLoc = LocalDateTime.now();
-            if (isLogged){ writeToFile.println(user + " logged in at: " + timeAtLoc); }
+            if (isLogged){ writeToFile.println(user + " logged in (success) at: " + timeAtLoc); }
             if (!isLogged){ writeToFile.println(user + " login failed at: " + timeAtLoc); }
             writeToFile.close();
             System.out.println(user + ": login attempt is recorded.");

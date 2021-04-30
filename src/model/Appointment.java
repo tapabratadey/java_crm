@@ -17,8 +17,8 @@ public class Appointment {
     private int appointmentCustomerId;
     private int contactId;
     private int userId;
-
-    public Appointment(){}
+    private String startZoneTime;
+    private String endZoneTime;
 
     public void setId(int id){ this.id = id; }
     public int getId(){ return id; }
@@ -92,6 +92,22 @@ public class Appointment {
 
     public int getUserId() {
         return userId;
+    }
+
+    public void setStartZone(String startZoneTime) {
+        this.startZoneTime = startZoneTime;
+    }
+
+    public void setEndZone(String endZoneTime) {
+        this.endZoneTime = endZoneTime;
+    }
+
+    public String getStartZoneTime() {
+        return startZoneTime;
+    }
+
+    public String getEndZoneTime() {
+        return endZoneTime;
     }
 }
 
