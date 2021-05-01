@@ -47,7 +47,7 @@ public class ModifyCustomer implements Initializable {
         comboBoxCountry.setItems(DBCountries.getAllCountries());
         comboBoxCountry.getSelectionModel().selectedItemProperty().addListener((model, name, value) -> {
             System.out.println("Country: " + value.toString());
-            if(value.toString().equals("US")){ comboBoxRegion.setItems(DBCountries.getUSRegions());}
+            if(value.toString().equals("U.S")){ comboBoxRegion.setItems(DBCountries.getUSRegions());}
             if(value.toString().equals("UK")){ comboBoxRegion.setItems(DBCountries.getUKRegions()); }
             if(value.toString().equals("Canada")){ comboBoxRegion.setItems(DBCountries.getCARegions()); }
         });
@@ -56,55 +56,53 @@ public class ModifyCustomer implements Initializable {
     public void customerToModify(Customer customer, int idx) {
         customerToModify = customer;
         customerIdx = idx;
-        customerId.setText(Integer.toString(customerToModify.getId()));
-        customerName.setText(customerToModify.getName());
-        customerAddress.setText(customerToModify.getAddress());
-        customerPostal.setText(customerToModify.getPostalCode());
-        customerPhone.setText(customerToModify.getPhoneNumber());
-        comboBoxCountry.setValue(customerToModify.getCountry());
-        comboBoxRegion.setValue(customerToModify.getDivision());
+        customerId.setText(Integer.toString(customer.getId()));
+        customerName.setText(customer.getName());
+        customerAddress.setText(customer.getAddress());
+        customerPostal.setText(customer.getPostalCode());
+        customerPhone.setText(customer.getPhoneNumber());
+        comboBoxCountry.setValue(customer.getCountry());
+        comboBoxRegion.setValue(customer.getDivision());
     }
 
-    public void customerSaveButton(ActionEvent actionEvent) {
-        try{
-            int id = customerToModify.getId();
-            String name = customerToModify.getName();
-            String address = customerToModify.getAddress();
-            String postal = customerToModify.getPostalCode();
-            String phone = customerToModify.getPhoneNumber();
-            String country = comboBoxCountry.getValue().toString();
-            System.out.println("SAVE: " + country);
-            String region = comboBoxRegion.getValue().toString();
-            System.out.println("SAVE: " + region);
-            if (name == "" ||
-                address == "" ||
-                postal == "" ||
-                phone == ""){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer fields cannot be empty");
-                alert.showAndWait();
-            }else{
-                Customer updateCustomer = new Customer();
-                DBCustomer updateDBCustomer = new DBCustomer();
-                Customer customer = new Customer();
-                customer.setId(id);
-                customer.setName(name);
-                customer.setAddress(address);
-                customer.setPostalCode(postal);
-                customer.setPhoneNumber(phone);
-                customer.setDivision(region);
-                customer.setCountry(country);
-                updateDBCustomer.modifyCustomer(customer);
-//                Customers customerController = new Customers();
-//                customerController.setupCustomer();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Customers.fxml")));
-                Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }catch(NumberFormatException | IOException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input");
+    public void customerSaveButton(ActionEvent actionEvent) throws IOException {
+        String id = customerId.getText();
+        String name = customerName.getText();
+        String address = customerAddress.getText();
+        String postal = customerPostal.getText();
+        String phone = customerPhone.getText();
+        String country = (String) comboBoxCountry.getValue();
+        String region = (String) comboBoxRegion.getValue();
+        String errMsg = "";
+
+        if(name == ""){ errMsg+="Missing name\n"; }
+        if(address == ""){ errMsg+="Missing address\n";}
+        if(postal == "") {errMsg+="Missing postal\n"; }
+        if(phone == "") { errMsg+="Missing phone\n";}
+        if(country == null) { errMsg+="Missing country\n"; }
+        if(region == null){errMsg+= "Missing region\n";}
+        if (errMsg.length() != 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(errMsg);
             alert.showAndWait();
+        }else{
+
+            DBCustomer updateDBCustomer = new DBCustomer();
+            Customer customer = new Customer();
+            customer.setId(Integer.parseInt(id));
+            customer.setName(name);
+            customer.setAddress(address);
+            customer.setPostalCode(postal);
+            customer.setPhoneNumber(phone);
+            customer.setDivision(region);
+            customer.setCountry(country);
+            updateDBCustomer.modifyCustomer(customer);
+
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Customers.fxml")));
+            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
     }
 

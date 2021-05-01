@@ -54,7 +54,7 @@ public class Appointments implements Initializable {
 
     public void scheduleAppointmentButton(ActionEvent actionEvent) throws IOException {
         Parent root =
-                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/ScheduleAppointments.fxml")));
+                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/ScheduleAppointment.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Schedule Appointments");
@@ -63,13 +63,21 @@ public class Appointments implements Initializable {
     }
 
     public void editAppointment(ActionEvent actionEvent) throws IOException {
-        Parent root =
-                FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/ScheduleAppointments.fxml")));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Schedule Appointments");
-        stage.setScene(scene);
-        stage.show();
+        Appointment appointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+        if (appointment == null){
+            Alert alertUserErr = new Alert(Alert.AlertType.ERROR, "Please select an appointment to edit");
+            alertUserErr.showAndWait();
+        }else{
+            FXMLLoader loader = new FXMLLoader((getClass().getResource("/views/EditAppointment.fxml")));
+            Parent root = (Parent) loader.load();
+            EditAppointment editApp = loader.getController();
+            int idx = appointmentTable.getSelectionModel().getSelectedIndex();
+            editApp.editAppointment(appointment, idx);
+            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void deleteAppointment(ActionEvent actionEvent) {

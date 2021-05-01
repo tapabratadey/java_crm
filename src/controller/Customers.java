@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.Appointment;
 import model.Country;
 import model.Customer;
 
@@ -72,18 +73,21 @@ public class Customers implements Initializable {
             Alert alertUserErr = new Alert(Alert.AlertType.ERROR, "Please select a customer to delete");
             alertUserErr.showAndWait();
         }else{
-            Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
+            Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure? This action will delete customer" +
+                    " " +
+                    "appointments too.");
             Optional<ButtonType> optButton = alertUser.showAndWait();
             try{
                 if (optButton.isPresent() && optButton.get() == ButtonType.OK) {
                         Customer customer = new Customer();
                         DBCustomer dbCustomer = new DBCustomer();
-//                        Appointment appointment = new Appointment();
-//                        DBAppointments dbAppointment = new DBAppointments();
+                        Appointment appointment = new Appointment();
+                        DBAppointments dbAppointment = new DBAppointments();
                         customer.setId(customerSelected.getId());
-//                        appointment.setId(customerSelected.getid());
-//                        dbAppointment.deleteAppointment(appointment);
+                        appointment.setId(customerSelected.getId());
+                        dbAppointment.deleteAppointment(appointment);
                         dbCustomer.deleteCustomer(customer);
+                        setupCustomer();
                     }
                 }catch(IndexOutOfBoundsException | NoSuchElementException err){
                 System.out.println(err);

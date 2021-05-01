@@ -4,17 +4,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScheduleAppointment">
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EditAppointment">
     <children>
         <Button layoutX="505.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutButton" text="Logout" />
         <GridPane layoutX="34.0" layoutY="63.0" prefHeight="274.0" prefWidth="533.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="139.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="88.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="67.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="93.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="88.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="67.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="93.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="60.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -24,10 +27,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="Appointment_ID" />
@@ -45,21 +48,21 @@
                 <Label GridPane.rowIndex="7" />
                 <Label text="Customer_ID" GridPane.rowIndex="8" />
                 <Label text="User_ID" GridPane.rowIndex="9" />
-            <ComboBox fx:id="comboBoxContact" prefHeight="31.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label prefHeight="17.0" prefWidth="83.0" text="    Start Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Label text="     End Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox fx:id="startHourComboBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Label text="  Start Minutes" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <Label text="  End Minutes" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-            <ComboBox fx:id="startMinComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-            <ComboBox fx:id="endMinComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-            <ComboBox fx:id="endHourComboBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <ComboBox fx:id="customerIdComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="userIdComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <ComboBox fx:id="comboBoxContact" prefHeight="31.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label prefHeight="17.0" prefWidth="83.0" text="    Start Hour" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <Label text="     End Hour" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <ComboBox fx:id="startHourComboBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                <Label text="  Start Minutes" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                <Label text="  End Minutes" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                <ComboBox fx:id="startMinComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                <ComboBox fx:id="endMinComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                <ComboBox fx:id="endHourComboBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                <ComboBox fx:id="customerIdComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <ComboBox fx:id="userIdComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             </children>
         </GridPane>
-        <Label layoutX="186.0" layoutY="18.0" prefHeight="3.0" prefWidth="228.0" text="Schedule Appointment">
+        <Label layoutX="208.0" layoutY="11.0" prefHeight="25.0" prefWidth="184.0" text="Edit Appointment">
             <font>
                 <Font size="22.0" />
             </font>

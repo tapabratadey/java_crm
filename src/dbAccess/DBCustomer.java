@@ -42,6 +42,24 @@ public class DBCustomer {
         }
         return customersList;
     }
+    public static ObservableList<String> getAllCustomerId(){
+        ObservableList<String> customersList = FXCollections.observableArrayList();
+        try{
+            String sql = "select " +
+                    "Customer_ID " +
+                    "from customers";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Customer customer = new Customer();
+                customer.setId(rs.getInt("Customer_ID"));
+                customersList.add(String.valueOf(customer.getId()));
+            }
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return customersList;
+    }
     public void modifyCustomer(Customer customer){
         try{
             String sql = "update " +
@@ -49,24 +67,17 @@ public class DBCustomer {
                     "first_level_divisions, " +
                     "countries " +
                     "SET " +
-                    "Customer_Name = ?, " +
-                    "Address = ?, " +
-                    "Postal_Code = ?, " +
-                    "Phone = ?," +
-                    "first_level_divisions.Division = ?, " +
-                    "countries.Country = ?" +
+                    "Customer_Name = \"" + customer.getName() + "\", " +
+                    "Address = \"" + customer.getAddress() + "\", " +
+                    "Postal_Code = \"" + customer.getPostalCode() + "\", " +
+                    "Phone = \"" + customer.getPhoneNumber() + "\"," +
+                    "first_level_divisions.Division = \"" +customer.getDivision()+ "\", " +
+                    "countries.Country = \"" + customer.getCountry() + "\" " +
                     "where " +
                     "customers.Division_ID = first_level_divisions.Division_ID " +
                     "and countries.Country_ID = first_level_divisions.Country_ID " +
-                    "and customers.Customer_ID = ?";
+                    "and customers.Customer_ID = \"" + customer.getId() + "\" ";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            ps.setString(1, customer.getName());
-            ps.setString(2, customer.getAddress());
-            ps.setString(3, customer.getPostalCode());
-            ps.setString(4, customer.getPhoneNumber());
-            ps.setString(5, customer.getDivision());
-            ps.setString(6, customer.getCountry());
-            ps.setInt(7, customer.getId());
             ps.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();

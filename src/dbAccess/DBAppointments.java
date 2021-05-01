@@ -4,12 +4,8 @@ import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
-import model.Country;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -77,5 +73,101 @@ public class DBAppointments {
             throwable.printStackTrace();
         }
         return appointmentsList;
+    }
+
+    public void deleteAppointment(Appointment appointment) {
+        try{
+            String sql = "delete " +
+                    "from " +
+                    "appointments " +
+                    "where " +
+                    "Appointment_ID = \"" +appointment.getId()+ "\"";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ps.executeUpdate();
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+    }
+
+    public boolean checkIfOverlap(Appointment appointment) {
+        try{
+            String sql ="select * from appointments "
+                    + "where (\""+appointment.getAppointmentStartTime()+"\" " +
+                    "between Start AND end OR \""+appointment.getAppointmentEndTime()+"\" BETWEEN Start " +
+                    "AND End OR \""+appointment.getAppointmentStartTime()+"\"" +
+                    " < Start " +
+                    "AND \""+appointment.getAppointmentEndTime()+"\" > " +
+                    "End) "
+                    + "AND (Customer_ID = \""+appointment.getAppointmentCustomerId()+"\")";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                return true;
+            }
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return false;
+    }
+
+    public void addAppointment(Appointment appointment) {
+        try{
+            String sql = "insert into" +
+                    " appointments(Appointment_ID, " +
+                    "Title, " +
+                    "Description," +
+                    "Location, " +
+                    "Type, " +
+                    "Start, " +
+                    "End, " +
+                    "Customer_ID, " +
+                    "User_ID, " +
+                    "Contact_ID) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,(select Contact_ID from contacts where Contact_Name = \""+appointment.getAppointmentContact()+"\"))";
+//            Statement statement = DBConnection.getConnection().createStatement();
+//            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
+
+//            System.out.println("ksdasasdf234234dffhajksf" + appointment.getTitle());
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ps.setInt(1, appointment.getId());
+            ps.setString(2, appointment.getTitle());
+            ps.setString(3, appointment.getAppointmentDescription());
+            ps.setString(4, appointment.getAppointmentLocation());
+            ps.setString(5, appointment.getAppointmentType());
+            ps.setTimestamp(6, appointment.getAppointmentStartTime());
+            ps.setTimestamp(7, appointment.getAppointmentEndTime());
+            ps.setInt(8, appointment.getAppointmentCustomerId());
+            ps.setInt(9, appointment.getUserId());
+//            ps.setInt(9, appointment.getContactId());
+            ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+//            rs.next();
+        }catch(SQLException throwable){
+            throwable.printStackTrace();
+        }
+    }
+
+    public void updateAppointment(Appointment appointment) {
+        try{
+            String sql = "update " +
+                    "appointments " +
+                    "SET " +
+                    "Title = \"" + appointment.getTitle() + "\", " +
+                    "Description = \"" + appointment.getAppointmentDescription() + "\", " +
+                    "Location = \"" + appointment.getAppointmentLocation() + "\", " +
+                    "Type = \"" +appointment.getAppointmentType()+ "\", " +
+                    "Start = \"" + appointment.getAppointmentStartTime() + "\", " +
+                    "End = \""+ appointment.getAppointmentEndTime() +"\", " +
+                    "Customer_ID = \""+ appointment.getAppointmentCustomerId() +"\", " +
+                    "User_ID = \""+ appointment.getUserId() +"\", " +
+                    "Contact_ID = \""+appointment.getContactId()+"\" "+
+                    "where " +
+                    "Appointment_ID = \""+appointment.getId()+"\"";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            System.out.println(sql);
+            ps.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
