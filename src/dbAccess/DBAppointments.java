@@ -124,10 +124,6 @@ public class DBAppointments {
                     "User_ID, " +
                     "Contact_ID) " +
                     "VALUES (?,?,?,?,?,?,?,?,?,(select Contact_ID from contacts where Contact_Name = \""+appointment.getAppointmentContact()+"\"))";
-//            Statement statement = DBConnection.getConnection().createStatement();
-//            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
-
-//            System.out.println("ksdasasdf234234dffhajksf" + appointment.getTitle());
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ps.setInt(1, appointment.getId());
             ps.setString(2, appointment.getTitle());
@@ -138,10 +134,7 @@ public class DBAppointments {
             ps.setTimestamp(7, appointment.getAppointmentEndTime());
             ps.setInt(8, appointment.getAppointmentCustomerId());
             ps.setInt(9, appointment.getUserId());
-//            ps.setInt(9, appointment.getContactId());
             ps.executeUpdate();
-//            ResultSet rs = ps.getGeneratedKeys();
-//            rs.next();
         }catch(SQLException throwable){
             throwable.printStackTrace();
         }
@@ -160,11 +153,11 @@ public class DBAppointments {
                     "End = \""+ appointment.getAppointmentEndTime() +"\", " +
                     "Customer_ID = \""+ appointment.getAppointmentCustomerId() +"\", " +
                     "User_ID = \""+ appointment.getUserId() +"\", " +
-                    "Contact_ID = \""+appointment.getContactId()+"\" "+
+                    "Contact_ID = (select Contact_ID from contacts where Contact_Name = \""+appointment.getAppointmentContact()+
+                    "\") "+
                     "where " +
                     "Appointment_ID = \""+appointment.getId()+"\"";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            System.out.println(sql);
             ps.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();

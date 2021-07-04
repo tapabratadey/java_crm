@@ -200,13 +200,12 @@ public class EditAppointment implements Initializable {
                     alert.showAndWait();
                 }else{
                     dbAppt.updateAppointment(appointment);
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Appointments.fxml")));
+                    Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                 }
-
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Appointments.fxml")));
-                Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
             }
         }
     }

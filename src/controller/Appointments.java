@@ -1,5 +1,6 @@
 package controller;
 
+import dbAccess.DBCustomer;
 import model.Appointment;
 import dbAccess.DBAppointments;
 import javafx.event.ActionEvent;
@@ -11,9 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -81,6 +84,25 @@ public class Appointments implements Initializable {
     }
 
     public void deleteAppointment(ActionEvent actionEvent) {
+        Appointment appointmentSelected = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+        if (appointmentSelected == null){
+            Alert alertUserErr = new Alert(Alert.AlertType.ERROR, "Please select an appointment to delete");
+            alertUserErr.showAndWait();
+        }else{
+            Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure? This action will cancel the " +
+                    "appointment. Id: " +
+                    appointmentSelected.getId() + " Type: " + appointmentSelected.getAppointmentType());
+            Optional<ButtonType> optButton = alertUser.showAndWait();
+            try{
+                if (optButton.isPresent() && optButton.get() == ButtonType.OK) {
+                    DBAppointments dbAppointment = new DBAppointments();
+                    dbAppointment.deleteAppointment(appointmentSelected);
+                    setupAppointments();
+                }
+            }catch(IndexOutOfBoundsException | NoSuchElementException err){
+                System.out.println(err);
+            }
+        }
     }
 
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
