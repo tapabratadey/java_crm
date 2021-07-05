@@ -28,7 +28,15 @@
             <Font size="22.0" />
         </font>
     </Label>
-   <RadioButton layoutX="14.0" layoutY="16.0" mnemonicParsing="false" text="Monthly" />
-   <RadioButton layoutX="106.0" layoutY="15.0" mnemonicParsing="false" text="Weekly" />
-   <RadioButton layoutX="191.0" layoutY="15.0" mnemonicParsing="false" text="All" />
+   <RadioButton fx:id="monthlyView"
+                onAction="#monthlyViewHandler"
+                layoutX="14.0" layoutY="16.0"
+                mnemonicParsing="false" text="Monthly" />
+   <RadioButton fx:id="weeklyView"
+                onAction="#weeklyViewHandler"
+           layoutX="106.0" layoutY="15.0" mnemonicParsing="false" text="Weekly" />
+   <RadioButton fx:id="allView"
+                onAction="#allViewHandler"
+                layoutX="191.0" layoutY="15.0"
+                mnemonicParsing="false" text="All" />
 </AnchorPane>

@@ -1,6 +1,7 @@
 package controller;
 
 import dbAccess.DBCustomer;
+import javafx.collections.ObservableList;
 import model.Appointment;
 import dbAccess.DBAppointments;
 import javafx.event.ActionEvent;
@@ -13,13 +14,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Appointments implements Initializable {
     public Button logOutButtonText;
@@ -36,6 +36,9 @@ public class Appointments implements Initializable {
     public TableColumn appointmentStartTime;
     public TableColumn appointmentEndTime;
     public TableColumn appointmentCustomerId;
+    public RadioButton monthlyView;
+    public RadioButton weeklyView;
+    public RadioButton allView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,6 +56,7 @@ public class Appointments implements Initializable {
         appointmentStartTime.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
         appointmentEndTime.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
         appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomerId"));
+        allView.setSelected(true);
     }
 
     public void scheduleAppointmentButton(ActionEvent actionEvent) throws IOException {
@@ -124,5 +128,59 @@ public class Appointments implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
+    }
+
+    public void monthlyViewHandler(ActionEvent actionEvent) {
+        allView.setSelected(false);
+        weeklyView.setSelected(false);
+        Calendar calendar = Calendar.getInstance();
+        String getMonth = new SimpleDateFormat("MMMM").format(calendar.getTime());
+        String getYear = new SimpleDateFormat("y").format(calendar.getTime());
+        ObservableList<Appointment> appointmentsList = DBAppointments.getMonthlyAppointments(getMonth, getYear);
+        if (appointmentsList.size() == 0){
+            Alert alertUser = new Alert(Alert.AlertType.ERROR, "No appointments available this month.");
+            Optional<ButtonType> optButton = alertUser.showAndWait();
+        }else{
+            appointmentTable.setItems(DBAppointments.getMonthlyAppointments(getMonth, getYear));
+            appointmentId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            appointmentDescription.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+            appointmentLocation.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+            appointmentContact.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+            appointmentType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+            appointmentStartTime.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
+            appointmentEndTime.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+            appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomerId"));
+        }
+    }
+
+    public void weeklyViewHandler(ActionEvent actionEvent) {
+        allView.setSelected(false);
+        monthlyView.setSelected(false);
+        Calendar calendar = Calendar.getInstance();
+        String getWeek = new SimpleDateFormat("w").format(calendar.getTime());
+        String getYear = new SimpleDateFormat("y").format(calendar.getTime());
+        ObservableList<Appointment> appointmentsList = DBAppointments.getWeeklyAppointments(getWeek, getYear);
+        if (appointmentsList.size() == 0){
+            Alert alertUser = new Alert(Alert.AlertType.ERROR, "No appointments available this week");
+            Optional<ButtonType> optButton = alertUser.showAndWait();
+        }else {
+            appointmentTable.setItems(DBAppointments.getWeeklyAppointments(getWeek, getYear));
+            appointmentId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            appointmentDescription.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+            appointmentLocation.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+            appointmentContact.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+            appointmentType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+            appointmentStartTime.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
+            appointmentEndTime.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+            appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomerId"));
+        }
+    }
+
+    public void allViewHandler(ActionEvent actionEvent) {
+        monthlyView.setSelected(false);
+        weeklyView.setSelected(false);
+        setupAppointments();
     }
 }
