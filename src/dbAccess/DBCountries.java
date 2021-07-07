@@ -14,6 +14,7 @@ import java.sql.*;
  */
 
 public class DBCountries {
+    //gets all countries
     public static ObservableList<String> getAllCountries(){
         ObservableList<String> countryList = FXCollections.observableArrayList();
         try{
@@ -32,6 +33,7 @@ public class DBCountries {
         return countryList;
     }
 
+    //gets all US states
     public static ObservableList<String> getUSRegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
         try{
@@ -48,6 +50,8 @@ public class DBCountries {
         }
         return divisionList;
     }
+
+    //gets all UK Regions
     public static ObservableList<String> getUKRegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
         try{
@@ -64,6 +68,8 @@ public class DBCountries {
         }
         return divisionList;
     }
+
+    //gets all CA Regions
     public static ObservableList<String> getCARegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
         try{
@@ -80,19 +86,4 @@ public class DBCountries {
         }
         return divisionList;
     }
-
-    /*public static void checkDateConversion(){
-        System.out.println("CREATE DATE FIRST");
-        String sql = "select Create_Date from countries";
-        try{
-            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Timestamp ts = rs.getTimestamp("Create_Date");
-                System.out.println("CD: " + ts.toLocalDateTime().toString());
-            }
-        }catch(SQLException throwable){
-            throwable.printStackTrace();
-        }
-    }*/
 }

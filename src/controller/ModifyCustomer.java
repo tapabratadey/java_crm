@@ -47,6 +47,7 @@ public class ModifyCustomer implements Initializable {
         setupComboBox();
     }
 
+    // sets up country combo box
     public void setupComboBox(){
         comboBoxCountry.setItems(DBCountries.getAllCountries());
         comboBoxCountry.getSelectionModel().selectedItemProperty().addListener((model, name, value) -> {
@@ -57,6 +58,7 @@ public class ModifyCustomer implements Initializable {
         });
     }
 
+    //populates customer fields
     public void customerToModify(Customer customer, int idx) {
         customerToModify = customer;
         customerIdx = idx;
@@ -69,6 +71,7 @@ public class ModifyCustomer implements Initializable {
         comboBoxRegion.setValue(customer.getDivision());
     }
 
+    //save button functionality
     public void customerSaveButton(ActionEvent actionEvent) throws IOException {
         String id = customerId.getText();
         String name = customerName.getText();
@@ -110,6 +113,7 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    // log out button functionality
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();
@@ -122,6 +126,7 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    //cancel button functionality
     public void customerCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();

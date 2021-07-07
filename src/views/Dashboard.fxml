@@ -17,6 +17,7 @@
       </Label>
       <Separator prefWidth="200.0" />
       <Label layoutX="157.0" layoutY="336.0" prefHeight="25.0" prefWidth="118.0" text="Appointments:" />
-      <Label fx:id="appointmentAlert" layoutX="261.0" layoutY="336.0" prefHeight="25.0" prefWidth="118.0" />
+      <Label fx:id="appointmentAlert" layoutX="261.0"
+             layoutY="336.0" prefHeight="25.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

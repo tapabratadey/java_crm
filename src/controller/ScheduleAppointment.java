@@ -58,6 +58,8 @@ public class ScheduleAppointment implements Initializable {
         setupContactComboBox();
         setupCustomerUserComboBox();
     }
+
+    //sets up hours
     public void setupTimeComboBox(){
         hours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
@@ -68,16 +70,19 @@ public class ScheduleAppointment implements Initializable {
         endMinComboBox.setItems(minutes);
     }
 
+    //sets up contact combo box
     public void setupContactComboBox(){
         comboBoxContact.setItems(DBContacts.getAllContacts());
         comboBoxContact.getSelectionModel().selectFirst();
     }
 
+    //sets up user combo box
     public void setupCustomerUserComboBox(){
         userIdComboBox.setItems(DBUser.getAllUsers());
         customerIdComboBox.setItems(DBCustomer.getAllCustomerId());
     }
 
+    //save button functionality
     public void appointmentSaveButton(ActionEvent actionEvent) throws IOException {
         String title = appointmentTitle.getText();
         String description = appointmentDescription.getText();
@@ -184,6 +189,7 @@ public class ScheduleAppointment implements Initializable {
         }
     }
 
+    //cancel button functionality
     public void customerCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();
@@ -196,6 +202,7 @@ public class ScheduleAppointment implements Initializable {
         }
     }
 
+    //logout button functionality
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();

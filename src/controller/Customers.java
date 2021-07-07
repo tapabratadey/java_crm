@@ -46,6 +46,7 @@ public class Customers implements Initializable {
         setupCustomer();
     }
 
+    //sets up customer table
     public void setupCustomer(){
         DBCustomer customer = new DBCustomer();
         customerTable.setItems(customer.getAllCustomers());
@@ -61,6 +62,7 @@ public class Customers implements Initializable {
         customerTable.sort();
     }
 
+    // add customer button
     public void addCustomerButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/AddCustomer.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -70,6 +72,7 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    // delete customer button functionality
     public void deleteCustomerButton(ActionEvent actionEvent) {
         Customer customerSelected = (Customer) customerTable.getSelectionModel().getSelectedItem();
         if (customerSelected == null){
@@ -98,6 +101,7 @@ public class Customers implements Initializable {
         }
     }
 
+    //dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -107,6 +111,7 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    //edit customer button
     public void editCustomerButton(ActionEvent actionEvent) throws IOException {
         Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
         if (customer == null){
@@ -125,6 +130,7 @@ public class Customers implements Initializable {
         }
     }
 
+    // logout button
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();

@@ -12,6 +12,7 @@ import java.sql.*;
  */
 
 public class DBCustomer {
+    //gets all customers
     public static ObservableList<Customer> getAllCustomers(){
         ObservableList<Customer> customersList = FXCollections.observableArrayList();
         try{
@@ -46,6 +47,8 @@ public class DBCustomer {
         }
         return customersList;
     }
+
+    //gets all customer ids
     public static ObservableList<String> getAllCustomerId(){
         ObservableList<String> customersList = FXCollections.observableArrayList();
         try{
@@ -64,6 +67,8 @@ public class DBCustomer {
         }
         return customersList;
     }
+
+    //modifies customers
     public void modifyCustomer(Customer customer){
         try{
             String sql = "update " +
@@ -88,6 +93,7 @@ public class DBCustomer {
         }
     }
 
+    //delete's customers
     public void deleteCustomer(Customer customer) {
         try{
             String sql = "delete from customers where Customer_ID = ?";
@@ -100,6 +106,7 @@ public class DBCustomer {
 
     }
 
+    //adds customers
     public void addCustomer(Customer customer) {
         try{
             String sql = "INSERT INTO " +

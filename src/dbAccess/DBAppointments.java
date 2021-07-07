@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class DBAppointments {
-
+    // queries all appointments
     public static ObservableList<Appointment> getAppointments(){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         try{
@@ -79,6 +79,7 @@ public class DBAppointments {
         return appointmentsList;
     }
 
+    //queries to delete appointments
     public void deleteAppointment(Appointment appointment) {
         try{
             String sql = "delete " +
@@ -93,6 +94,7 @@ public class DBAppointments {
         }
     }
 
+    //checks if appointments overlap or nto
     public boolean checkIfOverlap(Appointment appointment) {
         try{
             String sql ="select * from appointments "
@@ -114,6 +116,7 @@ public class DBAppointments {
         return false;
     }
 
+    //add a new appointment
     public void addAppointment(Appointment appointment) {
         try{
             String sql = "insert into" +
@@ -144,6 +147,7 @@ public class DBAppointments {
         }
     }
 
+    //updates an appointment
     public void updateAppointment(Appointment appointment) {
         try{
             String sql = "update " +
@@ -168,6 +172,7 @@ public class DBAppointments {
         }
     }
 
+    //gets monthly appointments
     public static ObservableList<Appointment> getMonthlyAppointments(String month, String year){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         try{
@@ -232,6 +237,7 @@ public class DBAppointments {
         return appointmentsList;
     }
 
+    //gets weekly appointments
     public static ObservableList<Appointment> getWeeklyAppointments(String weekNumber, String year){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         try{
@@ -292,4 +298,5 @@ public class DBAppointments {
         }
         return appointmentsList;
     }
+
 }

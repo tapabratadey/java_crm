@@ -60,6 +60,8 @@ public class EditAppointment implements Initializable {
         setupContactComboBox();
         setupCustomerUserComboBox();
     }
+
+    //sets up time combo box
     public void setupTimeComboBox(){
         hours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
@@ -70,16 +72,19 @@ public class EditAppointment implements Initializable {
         endMinComboBox.setItems(minutes);
     }
 
+    // sets up contact combo box
     public void setupContactComboBox(){
         comboBoxContact.setItems(DBContacts.getAllContacts());
         comboBoxContact.getSelectionModel().selectFirst();
     }
 
+    // sets up customer combo box
     public void setupCustomerUserComboBox(){
         userIdComboBox.setItems(DBUser.getAllUsers());
         customerIdComboBox.setItems(DBCustomer.getAllCustomerId());
     }
 
+    // edit appointment functionality
     public void editAppointment(Appointment appointment, int idx) {
         appointmentToModify = appointment;
         appointmentIdx = idx;
@@ -103,6 +108,7 @@ public class EditAppointment implements Initializable {
         userIdComboBox.setValue(appointment.getUserId());
     }
 
+    // appointment save button functionality
     public void appointmentSaveButton(ActionEvent actionEvent) throws IOException {
         int id = Integer.valueOf(appointmentId.getText());
         String title = appointmentTitle.getText();
@@ -202,6 +208,7 @@ public class EditAppointment implements Initializable {
         }
     }
 
+    // cancel button functionality
     public void customerCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();
@@ -214,6 +221,7 @@ public class EditAppointment implements Initializable {
         }
     }
 
+    // log out button functionality
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();

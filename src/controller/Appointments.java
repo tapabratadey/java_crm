@@ -50,6 +50,7 @@ public class Appointments implements Initializable {
         setupAppointments();
     }
 
+    // sets up appointment table
     public void setupAppointments(){
         appointmentTable.setItems(DBAppointments.getAppointments());
         appointmentId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -64,6 +65,7 @@ public class Appointments implements Initializable {
         allView.setSelected(true);
     }
 
+    // scheduling button
     public void scheduleAppointmentButton(ActionEvent actionEvent) throws IOException {
         Parent root =
                 FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/ScheduleAppointment.fxml")));
@@ -74,6 +76,7 @@ public class Appointments implements Initializable {
         stage.show();
     }
 
+    // appointment editing button
     public void editAppointment(ActionEvent actionEvent) throws IOException {
         Appointment appointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
         if (appointment == null){
@@ -92,6 +95,7 @@ public class Appointments implements Initializable {
         }
     }
 
+    // appointment delete button
     public void deleteAppointment(ActionEvent actionEvent) {
         Appointment appointmentSelected = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
         if (appointmentSelected == null){
@@ -114,6 +118,7 @@ public class Appointments implements Initializable {
         }
     }
 
+    // dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -123,6 +128,7 @@ public class Appointments implements Initializable {
         stage.show();
     }
 
+    // logout button
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
         Optional<ButtonType> optButton = alertUser.showAndWait();
@@ -135,6 +141,7 @@ public class Appointments implements Initializable {
         }
     }
 
+    //monthly view toggle
     public void monthlyViewHandler(ActionEvent actionEvent) {
         allView.setSelected(false);
         weeklyView.setSelected(false);
@@ -159,6 +166,7 @@ public class Appointments implements Initializable {
         }
     }
 
+    //weekly view toggle
     public void weeklyViewHandler(ActionEvent actionEvent) {
         allView.setSelected(false);
         monthlyView.setSelected(false);
@@ -183,6 +191,7 @@ public class Appointments implements Initializable {
         }
     }
 
+    //all view toggle
     public void allViewHandler(ActionEvent actionEvent) {
         monthlyView.setSelected(false);
         weeklyView.setSelected(false);

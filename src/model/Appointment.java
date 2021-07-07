@@ -1,9 +1,17 @@
 package model;
 
+import db.DBConnection;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Appointment Class
@@ -67,7 +75,6 @@ public class Appointment {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    public void setAppointmentAlert() { }
     public String getAppointmentContact() {
         return appointmentContact;
     }

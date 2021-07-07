@@ -53,12 +53,14 @@ public class Login implements Initializable {
         getZone.setText(findZone());
     }
 
+    // finds the zone of the user during login
     private String findZone() {
         String location;
         ZoneId zone = ZoneId.systemDefault();
         return zone.toString();
     }
 
+    //login button functionality
     public void loginButton(ActionEvent actionEvent) throws IOException {
         String username = usernameText.getText();
         String password = passwordText.getText();
@@ -87,6 +89,8 @@ public class Login implements Initializable {
             }
         }
     }
+
+    // checks for password during login
     public static Boolean tryLogin(String username, String password){
         try{
             String sql = "select * from users";
@@ -103,9 +107,13 @@ public class Login implements Initializable {
         }
         return false;
     }
+
+    //gets logged user to print
     public String getLoggedUser(){
         return loggedUser;
     }
+
+    //log tracker writes on login_activity.txt
     public static void userLogInTracker(String user, boolean isLogged){
         try{
             FileWriter fileToWrite = new FileWriter("login_activity.txt", true);
