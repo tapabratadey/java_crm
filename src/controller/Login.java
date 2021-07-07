@@ -23,6 +23,10 @@ import javafx.stage.Stage;
 import java.time.*;
 import java.sql.*;
 
+/**
+ * Login Screen
+ */
+
 public class Login implements Initializable {
     public Label welcomeMsg;
     public TextField usernameText;
@@ -62,10 +66,6 @@ public class Login implements Initializable {
         if (isLogged){
             loggedUser = username;
             System.out.println("User: " + loggedUser + " logged in.");
-            /**
-            * AddAppointment newUser = new AddAppointment();
-            * newUser.setUserId(loggedUser);
-            */
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
             Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

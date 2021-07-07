@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Country Class
+ */
+
 public class Country {
     private int id;
     private String name;

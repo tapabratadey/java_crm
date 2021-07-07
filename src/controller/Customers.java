@@ -1,9 +1,7 @@
 package controller;
 
 import dbAccess.DBAppointments;
-import dbAccess.DBCountries;
 import dbAccess.DBCustomer;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,14 +11,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Appointment;
-import model.Country;
 import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+/**
+ * Screen to view customers
+ */
 
 public class Customers implements Initializable {
     public TableView customerTable;

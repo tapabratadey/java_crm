@@ -8,6 +8,11 @@ import model.Country;
 
 import java.sql.*;
 
+
+/**
+ * Database queries related to Countries
+ */
+
 public class DBCountries {
     public static ObservableList<String> getAllCountries(){
         ObservableList<String> countryList = FXCollections.observableArrayList();

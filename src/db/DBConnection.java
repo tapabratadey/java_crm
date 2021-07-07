@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Database connection configuration
+ */
+
 public class DBConnection {
     private static final String protocol = "jdbc";
     private static final String vendorName = ":mysql://";

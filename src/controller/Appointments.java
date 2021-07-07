@@ -21,6 +21,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+
+/**
+ * Screen to view Appointments
+ */
+
 public class Appointments implements Initializable {
     public Button logOutButtonText;
     public Button scheduleAppointmentText;

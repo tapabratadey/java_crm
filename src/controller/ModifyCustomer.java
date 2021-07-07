@@ -20,6 +20,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Screen to edit customers
+ */
+
 public class ModifyCustomer implements Initializable {
     public Label customerIdLabel;
     public Label customerNameLabel;

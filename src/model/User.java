@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * User Class
+ */
+
 public class User {
     private int userId;
     private String userName;

@@ -20,6 +20,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Screen to add customers
+ */
+
 public class AddCustomer implements Initializable {
     public Label customerIdLabel;
     public Label customerNameLabel;

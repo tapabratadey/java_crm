@@ -10,6 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Database queries related to Contacts
+ */
+
 public class DBContacts {
     public static ObservableList<String> getAllContacts() {
         ObservableList<String> contactsList = FXCollections.observableArrayList();

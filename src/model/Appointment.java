@@ -5,6 +5,10 @@ import javafx.scene.control.TableView;
 
 import java.sql.Timestamp;
 
+/**
+ * Appointment Class
+ */
+
 public class Appointment {
     private int id;
     private String title;
@@ -33,81 +37,65 @@ public class Appointment {
     public void setAppointmentLocation(String appointmentLocation){
         this.appointmentLocation = appointmentLocation;
     }
-
     public String getAppointmentLocation() {
         return appointmentLocation;
     }
-
     public void setAppointmentContact(String appointmentContact) {
         this.appointmentContact = appointmentContact;
     }
-
     public void setAppointmentType(String appointmentType) {
         this.appointmentType = appointmentType;
     }
-
     public void setAppointmentStartTime(Timestamp appointmentStartTime) {
         this.appointmentStartTime = appointmentStartTime;
     }
-
     public void setAppointmentEndTime(Timestamp appointmentEndTime) {
         this.appointmentEndTime = appointmentEndTime;
     }
-
     public void setAppointmentCustomerId(int appointmentCustomerId) {
         this.appointmentCustomerId = appointmentCustomerId;
     }
-
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getAppointmentContact() {
-        return appointmentContact;
-    }
-
-    public String getAppointmentType() {
-        return appointmentType;
-    }
-
-    public Timestamp getAppointmentStartTime() {
-        return appointmentStartTime;
-    }
-
-    public Timestamp getAppointmentEndTime() {
-        return appointmentEndTime;
-    }
-
-    public int getAppointmentCustomerId() {
-        return appointmentCustomerId;
-    }
-
-    public int getContactId() {
-        return contactId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
     public void setStartZone(String startZoneTime) {
         this.startZoneTime = startZoneTime;
     }
-
     public void setEndZone(String endZoneTime) {
         this.endZoneTime = endZoneTime;
+    }
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public void setAppointmentAlert() { }
+    public String getAppointmentContact() {
+        return appointmentContact;
+    }
+    public String getAppointmentType() {
+        return appointmentType;
+    }
+    public Timestamp getAppointmentStartTime() {
+        return appointmentStartTime;
+    }
+    public Timestamp getAppointmentEndTime() {
+        return appointmentEndTime;
+    }
+    public int getAppointmentCustomerId() {
+        return appointmentCustomerId;
+    }
+    public int getContactId() {
+        return contactId;
+    }
+    public int getUserId() {
+        return userId;
     }
 
     public String getStartZoneTime() {
         return startZoneTime;
     }
-
     public String getEndZoneTime() {
         return endZoneTime;
     }
+
 }
 

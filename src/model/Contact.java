@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Contacts Class
+ */
+
 public class Contact {
     private String contactName;
     private int contactId;

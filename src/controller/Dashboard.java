@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,21 +20,24 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Global Dashboard Screen
+ */
+
 public class Dashboard implements Initializable {
     public Button logOutButtonText;
     public Button viewAppointmentsText;
     public Button viewReportsText;
     public Button viewCustomersText;
     public Label dashboardHeader;
+    public Label appointmentAlert;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /**
-         * Appointment checkAppointments = new Appointment();
-         *  checkAppointments.setAppointmentAlert();
-         */
-    }
+          Appointment appointments = new Appointment();
+          appointments.setAppointmentAlert();
 
+    }
 
     public void viewAppointmentButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Appointments.fxml")));

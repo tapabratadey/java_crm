@@ -10,6 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Database queries related to Users
+ */
+
 public class DBUser {
     public static ObservableList getAllUsers() {
         ObservableList<String> usersList = FXCollections.observableArrayList();

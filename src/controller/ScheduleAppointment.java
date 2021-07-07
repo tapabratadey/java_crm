@@ -27,6 +27,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Screen to schedule appointment
+ */
+
 public class ScheduleAppointment implements Initializable {
 
     public ComboBox userIdComboBox;
@@ -47,10 +51,6 @@ public class ScheduleAppointment implements Initializable {
     public ComboBox endHourComboBox;
     public ComboBox startHourComboBox;
     public DatePicker datePicker;
-
-
-//    DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
-//    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

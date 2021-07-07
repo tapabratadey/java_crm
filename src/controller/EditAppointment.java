@@ -28,8 +28,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class EditAppointment implements Initializable {
+/**
+ * Screen to edit appointments
+ */
 
+public class EditAppointment implements Initializable {
     public ComboBox userIdComboBox;
     public ComboBox customerIdComboBox;
     public ComboBox comboBoxContact;
@@ -50,10 +53,6 @@ public class EditAppointment implements Initializable {
     public ComboBox endHourComboBox;
     public ComboBox startHourComboBox;
     public DatePicker datePicker;
-
-
-//    DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
-//    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -137,13 +136,6 @@ public class EditAppointment implements Initializable {
             alert.setContentText(errMsg);
             alert.showAndWait();
         } else {
-//            int idCounter = 0;
-//            DBAppointments dbAppointment = new DBAppointments();
-//            for (Appointment appt:dbAppointment.getAppointments()){
-//                if (appt.getId() > idCounter){ idCounter = appt.getId(); }
-//            }
-//            appointmentId.setText(String.valueOf(++idCounter));
-
             //get LocalDateTime
             LocalDateTime startLocalDT = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),
                     Integer.parseInt(startHourTime), Integer.parseInt(startMinTime));

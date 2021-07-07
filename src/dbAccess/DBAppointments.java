@@ -11,6 +11,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Database queries related to Appointments
+ */
+
 public class DBAppointments {
 
     public static ObservableList<Appointment> getAppointments(){
@@ -281,9 +285,6 @@ public class DBAppointments {
                 ZonedDateTime endZoneDT = endLocalDT.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
                 String endZoneTime = endZoneDT.toLocalDateTime().format(newFormat);
                 appointment.setEndZone(endZoneTime);
-
-                //add to list
-//                appointmentsList.add(String.valueOf(appointment));
                 appointmentsList.add(appointment);
             }
         }catch (SQLException throwable) {

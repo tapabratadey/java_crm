@@ -7,6 +7,10 @@ import model.Customer;
 
 import java.sql.*;
 
+/**
+ * Database queries related to Customers
+ */
+
 public class DBCustomer {
     public static ObservableList<Customer> getAllCustomers(){
         ObservableList<Customer> customersList = FXCollections.observableArrayList();
