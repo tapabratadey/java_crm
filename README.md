@@ -43,8 +43,8 @@ the password.
       - You can add/edit/delete/toggle between weekly and monthly appointments.
    * Reports Panel
       - Displays total number of customer appointments by month and type.
-      - Displays appointment schedules of each contacts.
-      - Displays reports of each operational country.
+      - Displays appointment schedules of each contact.
+      - Displays the operational countries.
    * Appointment Reminders
       - Displays appointment reminders if they are within 15 minutes of the appointment.
    * Logout Button
