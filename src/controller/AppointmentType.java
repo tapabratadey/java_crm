@@ -23,8 +23,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AppointmentType implements Initializable {
+/**
+ * Show Number of Appointments per month by Type
+ */
 
+public class AppointmentType implements Initializable {
     public Label statsLabel;
 
     @Override
