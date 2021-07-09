@@ -32,11 +32,12 @@ public class DBConnection {
         return conn;
     }
 
+    //lambda expression
     public static void closeConnection(){
         try{
             conn.close();
         }catch(Exception e){
-
+            System.out.println("Error: "+ e.getMessage());
         }
     }
 

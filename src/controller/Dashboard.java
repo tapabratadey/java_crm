@@ -62,7 +62,7 @@ public class Dashboard implements Initializable {
         stage.show();
     }
 
-    // button redirecting to the repors screen
+    // button redirecting to the report screen
     public void viewReportsButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Reports.fxml")));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -110,10 +110,15 @@ public class Dashboard implements Initializable {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             LocalDateTime timeNow = LocalDateTime.now();
+            if (rs.next() == false){
+                appointmentAlert.setText("No upcoming appointments.");
+            }
             while (rs.next()) {
                 String customer = rs.getString("Appointment_Id");
                 Timestamp start = rs.getTimestamp("Start");
 
+
+                System.out.println("customer");
                 //appointment start time conversion
                 DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
