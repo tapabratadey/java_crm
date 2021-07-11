@@ -121,7 +121,7 @@ public class Customers implements Initializable {
         }else{
             FXMLLoader loader = new FXMLLoader((getClass().getResource("/views/ModifyCustomer.fxml")));
             Parent root = (Parent) loader.load();
-            ModifyCustomer modCustomer = loader.getController();
+            EditCustomer modCustomer = loader.getController();
             int idx = customerTable.getSelectionModel().getSelectedIndex();
             modCustomer.customerToModify(customer, idx);
             Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

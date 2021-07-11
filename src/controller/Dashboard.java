@@ -116,9 +116,6 @@ public class Dashboard implements Initializable {
             while (rs.next()) {
                 String customer = rs.getString("Appointment_Id");
                 Timestamp start = rs.getTimestamp("Start");
-
-
-                System.out.println("customer");
                 //appointment start time conversion
                 DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

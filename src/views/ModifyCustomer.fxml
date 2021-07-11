@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifyCustomer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditCustomer">
     <children>
         <Button layoutX="524.0" layoutY="21.0" mnemonicParsing="false" onAction="#logOutButton" text="Logout" />
         <GridPane layoutX="87.0" layoutY="95.0" prefHeight="214.0" prefWidth="438.0">

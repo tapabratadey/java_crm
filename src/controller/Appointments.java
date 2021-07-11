@@ -51,7 +51,6 @@ public class Appointments implements Initializable {
     }
 
     // sets up appointment table
-    //lambda expression
     public void setupAppointments(){
         appointmentTable.setItems(DBAppointments.getAppointments());
         appointmentId.setCellValueFactory(new PropertyValueFactory<>("id"));

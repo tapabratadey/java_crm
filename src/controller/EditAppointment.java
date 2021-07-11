@@ -60,30 +60,39 @@ public class EditAppointment implements Initializable {
         setupContactComboBox();
         setupCustomerUserComboBox();
     }
-
     //sets up time combo box
     public void setupTimeComboBox(){
-        hours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
+        hours.setAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
-        minutes.addAll("00", "15", "30", "45");
+        minutes.setAll("00", "15", "30", "45");
         startHourComboBox.setItems(hours);
         startMinComboBox.setItems(minutes);
         endHourComboBox.setItems(hours);
         endMinComboBox.setItems(minutes);
     }
 
+    /**
+     *
+     */
     // sets up contact combo box
     public void setupContactComboBox(){
         comboBoxContact.setItems(DBContacts.getAllContacts());
         comboBoxContact.getSelectionModel().selectFirst();
     }
 
+    /**
+     *
+     */
     // sets up customer combo box
     public void setupCustomerUserComboBox(){
         userIdComboBox.setItems(DBUser.getAllUsers());
         customerIdComboBox.setItems(DBCustomer.getAllCustomerId());
     }
 
+    /**
+     * @param appointment
+     * @param idx
+     */
     // edit appointment functionality
     public void editAppointment(Appointment appointment, int idx) {
         appointmentToModify = appointment;
@@ -121,8 +130,8 @@ public class EditAppointment implements Initializable {
         String endHourTime = (String) endHourComboBox.getValue();
         String startMinTime = (String) startMinComboBox.getValue();
         String endMinTime = (String) endMinComboBox.getValue();
-        int customerId = (int) customerIdComboBox.getValue();
-        int userId = (int) userIdComboBox.getValue();
+        Integer customerId = (Integer) customerIdComboBox.getValue();
+        Integer userId = (Integer) userIdComboBox.getValue();
         String errMsg = "";
 
         if(title == ""){ errMsg+="Missing title\n"; }
@@ -135,8 +144,6 @@ public class EditAppointment implements Initializable {
         if(startMinTime == null){ errMsg+="Missing start minute\n";}
         if(endHourTime == null){errMsg+="Missing end hour\n";}
         if(endMinTime == null){ errMsg+="Missing end minute\n"; }
-//        if(customerId == null){ errMsg+="Missing customer\n"; }
-//        if(userId == null){ errMsg+= "Missing user\n";}
         if (errMsg.length() != 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(errMsg);
@@ -176,7 +183,7 @@ public class EditAppointment implements Initializable {
 
             if (startUTCZDT.isBefore(startUTC) ||
                     endUTCZDT.isAfter(endUTC)){
-                Alert alertUser = new Alert(Alert.AlertType.ERROR, "Please choose a time slot between 10am and 8pm " +
+                Alert alertUser = new Alert(Alert.AlertType.ERROR, "Please choose a time slot between 8am and 10pm " +
                         "EST");
                 alertUser.showAndWait();
             }else{

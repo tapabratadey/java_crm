@@ -41,6 +41,7 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        Locale.setDefault(Locale.FRENCH);
         ResourceBundle userLang;
         Locale currSystem = Locale.getDefault();
         userLang = ResourceBundle.getBundle("resourceBundle", currSystem);
@@ -62,6 +63,7 @@ public class Login implements Initializable {
 
     //login button functionality
     public void loginButton(ActionEvent actionEvent) throws IOException {
+
         String username = usernameText.getText();
         String password = passwordText.getText();
         boolean isLogged = tryLogin(username, password);
@@ -82,7 +84,8 @@ public class Login implements Initializable {
                 alertUser.showAndWait();
                 userLogInTracker(username, false);
             }
-            if (Locale.getDefault().toString().equals("en_FR")){
+            if (Locale.getDefault().toString().equals("fr")){
+                System.out.println("kasdf");
                 Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
                 alertUser.showAndWait();
                 userLogInTracker(username, false);

@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  * Screen to edit customers
  */
 
-public class ModifyCustomer implements Initializable {
+public class EditCustomer implements Initializable {
     public Label customerIdLabel;
     public Label customerNameLabel;
     public Label customerAddressLabel;
@@ -51,7 +51,6 @@ public class ModifyCustomer implements Initializable {
     public void setupComboBox(){
         comboBoxCountry.setItems(DBCountries.getAllCountries());
         comboBoxCountry.getSelectionModel().selectedItemProperty().addListener((model, name, value) -> {
-            System.out.println("Country: " + value.toString());
             if(value.toString().equals("U.S")){ comboBoxRegion.setItems(DBCountries.getUSRegions());}
             if(value.toString().equals("UK")){ comboBoxRegion.setItems(DBCountries.getUKRegions()); }
             if(value.toString().equals("Canada")){ comboBoxRegion.setItems(DBCountries.getCARegions()); }

@@ -58,19 +58,44 @@ public class DBAppointments {
                 appointment.setAppointmentContact(rs.getString("Contact_Name"));
                 Timestamp startTime = rs.getTimestamp("start");
                 Timestamp endTime = rs.getTimestamp("end");
+
+                System.out.println("DB Time (UTC): \n");
+                System.out.println(startTime);
+
                 //time conversions
+
+                //start time
+
+                //format to be converted to
                 DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                System.out.println("Format: \n");
+                System.out.println(newFormat);
+
+                // get local date time
                 LocalDateTime startLocalDT = startTime.toLocalDateTime();
+                System.out.println("LDT: \n");
+                System.out.println(startLocalDT);
+
+                //convert to ZDT
                 ZonedDateTime startZoneDT = startLocalDT.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
+                System.out.println("ZDT: \n");
+                System.out.println(startZoneDT);
+
+                // ZDT to LDT
                 String startZoneTime = startZoneDT.toLocalDateTime().format(newFormat);
+                System.out.println("String Zone Time to Local Time: \n");
+                System.out.println(startZoneTime);
+
                 appointment.setStartZone(startZoneTime);
+
+                //end time
+
                 LocalDateTime endLocalDT = endTime.toLocalDateTime();
                 ZonedDateTime endZoneDT = endLocalDT.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
                 String endZoneTime = endZoneDT.toLocalDateTime().format(newFormat);
                 appointment.setEndZone(endZoneTime);
 
-                //add to list
-//                appointmentsList.add(String.valueOf(appointment));
+                //add to List
                 appointmentsList.add(appointment);
             }
         }catch (SQLException throwable) {

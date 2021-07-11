@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class DBUser {
     public static ObservableList getAllUsers() {
-        ObservableList<String> usersList = FXCollections.observableArrayList();
+        ObservableList<Integer> usersList = FXCollections.observableArrayList();
         try{
             String sql = "select " +
                     "User_ID " +
@@ -26,7 +26,7 @@ public class DBUser {
             while(rs.next()){
                 User user = new User();
                 user.setUserId(rs.getInt("User_ID"));
-                usersList.add(String.valueOf(user.getUserId()));
+                usersList.add(user.getUserId());
             }
         }catch(SQLException throwable){
             throwable.printStackTrace();

@@ -113,7 +113,7 @@ public class ContactSchedule implements Initializable {
                 appointment.setAppointmentDescription(rs.getString("Description"));
                 appointment.setAppointmentStartTime(rs.getTimestamp("Start"));
                 appointment.setAppointmentEndTime(rs.getTimestamp("End"));
-                appointment.setAppointmentCustomerId(rs.getInt("Customer_ID"));
+//                appointment.setAppointmentCustomerId(String.valueOf(rs.getInt("Customer_ID")));
                 appointmentsList.add(appointment);
             }
         }

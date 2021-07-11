@@ -49,8 +49,8 @@ public class DBCustomer {
     }
 
     //gets all customer ids
-    public static ObservableList<String> getAllCustomerId(){
-        ObservableList<String> customersList = FXCollections.observableArrayList();
+    public static ObservableList<Integer> getAllCustomerId(){
+        ObservableList<Integer> customersList = FXCollections.observableArrayList();
         try{
             String sql = "select " +
                     "Customer_ID " +
@@ -60,7 +60,7 @@ public class DBCustomer {
             while(rs.next()){
                 Customer customer = new Customer();
                 customer.setId(rs.getInt("Customer_ID"));
-                customersList.add(String.valueOf(customer.getId()));
+                customersList.add(customer.getId());
             }
         }catch(SQLException throwable){
             throwable.printStackTrace();
