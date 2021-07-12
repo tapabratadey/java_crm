@@ -33,6 +33,10 @@ public class DBCountries {
         return countryList;
     }
 
+    /**
+     * Gets all US states
+     * @return
+     */
     //gets all US states
     public static ObservableList<String> getUSRegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
@@ -51,6 +55,10 @@ public class DBCountries {
         return divisionList;
     }
 
+    /**
+     * Gets all UK Regions
+     * @return
+     */
     //gets all UK Regions
     public static ObservableList<String> getUKRegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
@@ -69,6 +77,10 @@ public class DBCountries {
         return divisionList;
     }
 
+    /**
+     * Gets all Canada's Regions
+     * @return
+     */
     //gets all CA Regions
     public static ObservableList<String> getCARegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();

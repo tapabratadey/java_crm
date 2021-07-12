@@ -40,11 +40,19 @@ public class AddCustomer implements Initializable {
     public ComboBox comboBoxRegion;
     public ComboBox comboBoxCountry;
 
+    /**
+     * Initializes the combo boxes
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupComboBox();
     }
 
+    /**
+     * Setups up the country combo boxes
+     */
     //sets up combobox to populate them with countries.
     public void setupComboBox(){
         comboBoxCountry.setItems(DBCountries.getAllCountries());
@@ -55,6 +63,12 @@ public class AddCustomer implements Initializable {
         });
     }
 
+    /**
+     * On save click, the Customer details are grabbed from the field
+     * Error Checking -> Creates a New Customer
+     * @param actionEvent
+     * @throws IOException
+     */
     //save button functionality
     public void customerSaveButton(ActionEvent actionEvent) throws IOException {
         String name = customerName.getText();
@@ -103,6 +117,11 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    /**
+     * Logs the user out
+     * @param actionEvent
+     * @throws IOException
+     */
     //log out button
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");

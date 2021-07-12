@@ -42,11 +42,19 @@ public class EditCustomer implements Initializable {
     Customer customerToModify;
     int customerIdx;
 
+    /**
+     * Sets up the combo boxes
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupComboBox();
     }
 
+    /**
+     * Sets up the country combo boxes
+     */
     // sets up country combo box
     public void setupComboBox(){
         comboBoxCountry.setItems(DBCountries.getAllCountries());
@@ -57,6 +65,11 @@ public class EditCustomer implements Initializable {
         });
     }
 
+    /**
+     * Fills the customer form fields
+     * @param customer
+     * @param idx
+     */
     //populates customer fields
     public void customerToModify(Customer customer, int idx) {
         customerToModify = customer;
@@ -70,6 +83,11 @@ public class EditCustomer implements Initializable {
         comboBoxRegion.setValue(customer.getDivision());
     }
 
+    /**
+     * Saves a customer
+     * @param actionEvent
+     * @throws IOException
+     */
     //save button functionality
     public void customerSaveButton(ActionEvent actionEvent) throws IOException {
         String id = customerId.getText();
@@ -112,6 +130,11 @@ public class EditCustomer implements Initializable {
         }
     }
 
+    /**
+     * Logs out a customer
+     * @param actionEvent
+     * @throws IOException
+     */
     // log out button functionality
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -125,6 +148,11 @@ public class EditCustomer implements Initializable {
         }
     }
 
+    /**
+     * Cancels the Customer Edit action
+     * @param actionEvent
+     * @throws IOException
+     */
     //cancel button functionality
     public void customerCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");

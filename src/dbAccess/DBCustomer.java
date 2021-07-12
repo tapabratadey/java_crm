@@ -48,6 +48,10 @@ public class DBCustomer {
         return customersList;
     }
 
+    /**
+     * Gets all customer Ids
+     * @return
+     */
     //gets all customer ids
     public static ObservableList<Integer> getAllCustomerId(){
         ObservableList<Integer> customersList = FXCollections.observableArrayList();
@@ -68,6 +72,10 @@ public class DBCustomer {
         return customersList;
     }
 
+    /**
+     * Modifies a customer
+     * @param customer
+     */
     //modifies customers
     public void modifyCustomer(Customer customer){
         try{
@@ -93,6 +101,10 @@ public class DBCustomer {
         }
     }
 
+    /**
+     * Deletes a customer
+     * @param customer
+     */
     //delete's customers
     public void deleteCustomer(Customer customer) {
         try{
@@ -103,9 +115,12 @@ public class DBCustomer {
         }catch(SQLException e){
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Adds a new custoemr
+     * @param customer
+     */
     //adds customers
     public void addCustomer(Customer customer) {
         try{

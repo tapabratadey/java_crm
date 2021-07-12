@@ -47,11 +47,21 @@ public class Dashboard implements Initializable {
     public Label dashboardHeader;
     public Label appointmentAlert;
 
+    /**
+     * Initializes the Appointment Alert
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
           setAppointmentAlert();
     }
 
+    /**
+     * Takes the User to the Appointment Scheduling Screen
+     * @param actionEvent
+     * @throws IOException
+     */
     // button redirecting to the appointment screen
     public void viewAppointmentButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Appointments.fxml")));
@@ -62,6 +72,11 @@ public class Dashboard implements Initializable {
         stage.show();
     }
 
+    /**
+     * Takes the User to the Report Screen
+     * @param actionEvent
+     * @throws IOException
+     */
     // button redirecting to the report screen
     public void viewReportsButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Reports.fxml")));
@@ -72,6 +87,11 @@ public class Dashboard implements Initializable {
         stage.show();
     }
 
+    /**
+     * Takes the user to the Customer Screen
+     * @param actionEvent
+     * @throws IOException
+     */
     // button redirecting to the customer screen
     public void viewCustomersButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Customers.fxml")));
@@ -82,6 +102,11 @@ public class Dashboard implements Initializable {
         stage.show();
     }
 
+    /**
+     * Logs out an user
+     * @param actionEvent
+     * @throws IOException
+     */
     // log out button redirecting to the login screen
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -94,6 +119,11 @@ public class Dashboard implements Initializable {
             stage.show();
         }
     }
+
+    /**
+     * Displays upcoming appointments if they are scheduled within next 15 minutes
+     *
+     */
     //displays upcoming appointments in the next 15 minutes.
     //appointment ID, date, and time
     public void setAppointmentAlert() {
@@ -110,6 +140,7 @@ public class Dashboard implements Initializable {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             LocalDateTime timeNow = LocalDateTime.now();
+            System.out.println(rs.next());
             if (rs.next() == false){
                 appointmentAlert.setText("No upcoming appointments.");
             }

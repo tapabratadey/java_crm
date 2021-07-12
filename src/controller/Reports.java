@@ -24,6 +24,11 @@ public class Reports implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
+    /**
+     * Logs out the user
+     * @param actionEvent
+     * @throws IOException
+     */
     // log out button redirecting to the login screen
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -37,6 +42,11 @@ public class Reports implements Initializable {
         }
     }
 
+    /**
+     * Takes the user back to the dashboard
+     * @param actionEvent
+     * @throws IOException
+     */
     // dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
@@ -47,6 +57,11 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /**
+     * Takes the user to the Schedule of Contacts Screen
+     * @param actionEvent
+     * @throws IOException
+     */
     // Contact's Schedule view
     public void viewContactSchedule(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/ContactSchedule.fxml")));
@@ -57,6 +72,11 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /**
+     * Takes the user to the operational countries page
+     * @param actionEvent
+     * @throws IOException
+     */
     // Tally of Countries view
     public void viewRegionsTally(ActionEvent actionEvent) throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/OperationalCountries.fxml")));
@@ -67,6 +87,11 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /**
+     * Take the user to the Appointment Stats page
+     * @param actionEvent
+     * @throws IOException
+     */
     // Appointment Stats view
     public void viewAppointmentStats(ActionEvent actionEvent)throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/AppointmentType.fxml")));

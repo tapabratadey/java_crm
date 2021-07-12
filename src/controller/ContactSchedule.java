@@ -43,7 +43,11 @@ public class ContactSchedule implements Initializable {
     public TableColumn appointmentEndTime;
     public TableColumn appointmentCustomerId;
 
-
+    /**
+     * Populates the appointment tables
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentTable.setItems(getContactSchedule());
@@ -57,6 +61,11 @@ public class ContactSchedule implements Initializable {
         appointmentCustomerId.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomerId"));
     }
 
+    /**
+     * Logs out a customer
+     * @param actionEvent
+     * @throws IOException
+     */
     // log out button redirecting to the login screen
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -70,6 +79,11 @@ public class ContactSchedule implements Initializable {
         }
     }
 
+    /**
+     * Takes the customer back to the Reports Dashboard
+     * @param actionEvent
+     * @throws IOException
+     */
     // Reports dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Reports.fxml")));
@@ -80,6 +94,10 @@ public class ContactSchedule implements Initializable {
         stage.show();
     }
 
+    /**
+     * Gets Schedule of Contacts and returns list of appointments
+     * @return
+     */
     // Queries Schedule of Contacts
     public ObservableList getContactSchedule(){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
@@ -113,7 +131,6 @@ public class ContactSchedule implements Initializable {
                 appointment.setAppointmentDescription(rs.getString("Description"));
                 appointment.setAppointmentStartTime(rs.getTimestamp("Start"));
                 appointment.setAppointmentEndTime(rs.getTimestamp("End"));
-//                appointment.setAppointmentCustomerId(String.valueOf(rs.getInt("Customer_ID")));
                 appointmentsList.add(appointment);
             }
         }

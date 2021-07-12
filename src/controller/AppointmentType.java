@@ -30,9 +30,19 @@ import java.util.ResourceBundle;
 public class AppointmentType implements Initializable {
     public Label statsLabel;
 
+    /**
+     * Initializes the Appointment Type Screen
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){getStats();}
 
+    /**
+     * Logs out a customer
+     * @param actionEvent
+     * @throws IOException
+     */
     // log out button redirecting to the login screen
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -46,6 +56,11 @@ public class AppointmentType implements Initializable {
         }
     }
 
+    /**
+     * Takes the user back to the Report Dashbaord
+     * @param actionEvent
+     * @throws IOException
+     */
     // Reports dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Reports.fxml")));
@@ -56,6 +71,9 @@ public class AppointmentType implements Initializable {
         stage.show();
     }
 
+    /**
+     * Grabs the appointment stats results
+     */
     // get appointment stat results
     public void getStats() {
         try {

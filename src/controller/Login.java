@@ -39,6 +39,11 @@ public class Login implements Initializable {
     public Label getZone;
     public Label zoneLabel;
 
+    /**
+     * Initializes Login fields and sets up the ResourceBundle package
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        Locale.setDefault(Locale.FRENCH);
@@ -54,6 +59,10 @@ public class Login implements Initializable {
         getZone.setText(findZone());
     }
 
+    /**
+     * Finds the zone of the user during login
+     * @return zone in string
+     */
     // finds the zone of the user during login
     private String findZone() {
         String location;
@@ -61,6 +70,12 @@ public class Login implements Initializable {
         return zone.toString();
     }
 
+    /**
+     * If authenticated -> takes the user to the dashboard
+     * else -> err
+     * @param actionEvent
+     * @throws IOException
+     */
     //login button functionality
     public void loginButton(ActionEvent actionEvent) throws IOException {
 
@@ -93,6 +108,12 @@ public class Login implements Initializable {
         }
     }
 
+    /**
+     * Checks if the user credentials are valid or not
+     * @param username
+     * @param password
+     * @return boolean
+     */
     // checks for password during login
     public static Boolean tryLogin(String username, String password){
         try{
@@ -111,11 +132,21 @@ public class Login implements Initializable {
         return false;
     }
 
+    /**
+     * Returns the logged user
+     * @return returns the logged user
+     */
     //gets logged user to print
     public String getLoggedUser(){
         return loggedUser;
     }
 
+    /**
+     * Login Tracker
+     * Adds Login Status Messages and writes them in a file + Terminal
+     * @param user
+     * @param isLogged
+     */
     //log tracker writes on login_activity.txt
     public static void userLogInTracker(String user, boolean isLogged){
         try{

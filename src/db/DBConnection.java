@@ -19,11 +19,18 @@ public class DBConnection {
     private static final String pass = "53689258768";
     private static Connection conn = null;
 
+    /**
+     * Starts the DB connection
+     * @return the session
+     */
     public static Connection startConnection(){
         try{
             Class.forName(MYSQLJBCDriver);
             conn = DriverManager.getConnection(jdbcURL, username, pass);
-            System.out.println("Connected to DB.");
+            /**
+             * Lambda Expression
+             */
+            new Thread(() -> System.out.println("Connected to DB!")).start();
         }catch(SQLException e) {
             e.printStackTrace();
         }catch (ClassNotFoundException e){
@@ -32,6 +39,9 @@ public class DBConnection {
         return conn;
     }
 
+    /**
+     * Closes the DB connection
+     */
     //lambda expression
     public static void closeConnection(){
         try{
@@ -41,6 +51,10 @@ public class DBConnection {
         }
     }
 
+    /**
+     * Gets the session
+     * @return
+     */
     public static Connection getConnection() {
         return conn;
     }

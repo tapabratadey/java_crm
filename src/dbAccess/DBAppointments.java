@@ -6,10 +6,14 @@ import javafx.collections.ObservableList;
 import model.Appointment;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 
 /**
  * Database queries related to Appointments
@@ -59,51 +63,48 @@ public class DBAppointments {
                 Timestamp startTime = rs.getTimestamp("start");
                 Timestamp endTime = rs.getTimestamp("end");
 
-                System.out.println("DB Time (UTC): \n");
-                System.out.println(startTime);
+                // Formatting to UTC
+                DateFormat UTCFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+                String UTCString = UTCFormat.format(startTime);
+                LocalDateTime ldt = LocalDateTime.parse(UTCString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+                ZoneId UTCZoneId = ZoneId.of("UTC");
+                ZonedDateTime UTCZonedDateTime = ldt.atZone(UTCZoneId);
 
-                //time conversions
+                // Formatting to User Zone
+                ZoneId UserZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+                ZonedDateTime userDateTime = UTCZonedDateTime.withZoneSameInstant(UserZoneId);
 
-                //start time
-
-                //format to be converted to
-                DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                System.out.println("Format: \n");
-                System.out.println(newFormat);
-
-                // get local date time
-                LocalDateTime startLocalDT = startTime.toLocalDateTime();
-                System.out.println("LDT: \n");
-                System.out.println(startLocalDT);
-
-                //convert to ZDT
-                ZonedDateTime startZoneDT = startLocalDT.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
-                System.out.println("ZDT: \n");
-                System.out.println(startZoneDT);
-
-                // ZDT to LDT
-                String startZoneTime = startZoneDT.toLocalDateTime().format(newFormat);
-                System.out.println("String Zone Time to Local Time: \n");
-                System.out.println(startZoneTime);
-
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm:ss");
+                String startZoneTime = format.format(userDateTime);
                 appointment.setStartZone(startZoneTime);
 
                 //end time
+                // Formatting to UTC
+                String UTCEndString = UTCFormat.format(endTime);
+                LocalDateTime ldtEnd = LocalDateTime.parse(UTCEndString, DateTimeFormatter.ofPattern("yyyy-MM-dd " +
+                        "HH:mm:ss.S"));
+                ZoneId UTCEndZoneId = ZoneId.of("UTC");
+                ZonedDateTime UTCZonedDateTimeEnd = ldtEnd.atZone(UTCEndZoneId);
 
-                LocalDateTime endLocalDT = endTime.toLocalDateTime();
-                ZonedDateTime endZoneDT = endLocalDT.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
-                String endZoneTime = endZoneDT.toLocalDateTime().format(newFormat);
+                // Formatting to User Zone
+                ZoneId UserZoneIdEnd = ZoneId.of(ZoneId.systemDefault().toString());
+                ZonedDateTime userDateTimeEnd = UTCZonedDateTimeEnd.withZoneSameInstant(UserZoneIdEnd);
+
+                String endZoneTime = format.format(userDateTimeEnd);
                 appointment.setEndZone(endZoneTime);
-
                 //add to List
                 appointmentsList.add(appointment);
             }
-        }catch (SQLException throwable) {
-            throwable.printStackTrace();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return appointmentsList;
     }
 
+    /**
+     * Deletes the Appointments
+     * @param appointment
+     */
     //queries to delete appointments
     public void deleteAppointment(Appointment appointment) {
         try{
@@ -119,6 +120,11 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * Checks if appointments overlap or not
+     * @param appointment
+     * @return
+     */
     //checks if appointments overlap or nto
     public boolean checkIfOverlap(Appointment appointment) {
         try{
@@ -141,6 +147,10 @@ public class DBAppointments {
         return false;
     }
 
+    /**
+     * Schedules a new appointment
+     * @param appointment
+     */
     //add a new appointment
     public void addAppointment(Appointment appointment) {
         try{
@@ -172,6 +182,10 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * Updates Appointments
+     * @param appointment
+     */
     //updates an appointment
     public void updateAppointment(Appointment appointment) {
         try{
@@ -197,6 +211,12 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * Retrieves monthly appointments
+     * @param month
+     * @param year
+     * @return
+     */
     //gets monthly appointments
     public static ObservableList<Appointment> getMonthlyAppointments(String month, String year){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
@@ -262,6 +282,12 @@ public class DBAppointments {
         return appointmentsList;
     }
 
+    /**
+     * Retrieves weekly appointments
+     * @param weekNumber
+     * @param year
+     * @return
+     */
     //gets weekly appointments
     public static ObservableList<Appointment> getWeeklyAppointments(String weekNumber, String year){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();

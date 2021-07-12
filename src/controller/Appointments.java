@@ -45,11 +45,20 @@ public class Appointments implements Initializable {
     public RadioButton weeklyView;
     public RadioButton allView;
 
+    /**
+     * Sets up the appointments
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupAppointments();
     }
 
+    /**
+     * Sets up the appointment table
+     * and sets 'All' view as default
+     */
     // sets up appointment table
     public void setupAppointments(){
         appointmentTable.setItems(DBAppointments.getAppointments());
@@ -65,6 +74,11 @@ public class Appointments implements Initializable {
         allView.setSelected(true);
     }
 
+    /**
+     * Takes the customer to the Appointment Scheduling screen.
+     * @param actionEvent
+     * @throws IOException
+     */
     // scheduling button
     public void scheduleAppointmentButton(ActionEvent actionEvent) throws IOException {
         Parent root =
@@ -76,6 +90,11 @@ public class Appointments implements Initializable {
         stage.show();
     }
 
+    /**
+     * Edits Customer Appointments
+     * @param actionEvent
+     * @throws IOException
+     */
     // appointment editing button
     public void editAppointment(ActionEvent actionEvent) throws IOException {
         Appointment appointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
@@ -95,6 +114,10 @@ public class Appointments implements Initializable {
         }
     }
 
+    /**
+     * Deletes Appointments
+     * @param actionEvent
+     */
     // appointment delete button
     public void deleteAppointment(ActionEvent actionEvent) {
         Appointment appointmentSelected = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
@@ -118,6 +141,11 @@ public class Appointments implements Initializable {
         }
     }
 
+    /**
+     * Takes the customer back to the dashboard
+     * @param actionEvent
+     * @throws IOException
+     */
     // dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));

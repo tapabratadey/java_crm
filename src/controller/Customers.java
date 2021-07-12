@@ -41,11 +41,19 @@ public class Customers implements Initializable {
     public Label customersText;
     public TableColumn customerDivision;
 
+    /**
+     * Initializes customer Table
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupCustomer();
     }
 
+    /**
+     * Sets up the customer table
+     */
     //sets up customer table
     //lambda expression
     public void setupCustomer(){
@@ -63,6 +71,11 @@ public class Customers implements Initializable {
         customerTable.sort();
     }
 
+    /**
+     * Takes the user to the customer add screen
+     * @param actionEvent
+     * @throws IOException
+     */
     // add customer button
     public void addCustomerButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/AddCustomer.fxml")));
@@ -73,6 +86,10 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    /**
+     * Deletes a customer
+     * @param actionEvent
+     */
     // delete customer button functionality
     public void deleteCustomerButton(ActionEvent actionEvent) {
         Customer customerSelected = (Customer) customerTable.getSelectionModel().getSelectedItem();
@@ -102,6 +119,11 @@ public class Customers implements Initializable {
         }
     }
 
+    /**
+     * Takes the customer back to the dashboard
+     * @param actionEvent
+     * @throws IOException
+     */
     //dashboard button
     public void dashboardButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
@@ -112,6 +134,11 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    /**
+     * Takes the user to the customer edit screen
+     * @param actionEvent
+     * @throws IOException
+     */
     //edit customer button
     public void editCustomerButton(ActionEvent actionEvent) throws IOException {
         Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
@@ -131,6 +158,11 @@ public class Customers implements Initializable {
         }
     }
 
+    /**
+     * Logs out an user
+     * @param actionEvent
+     * @throws IOException
+     */
     // logout button
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");

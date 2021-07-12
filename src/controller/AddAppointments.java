@@ -52,6 +52,11 @@ public class AddAppointments implements Initializable {
     public ComboBox startHourComboBox;
     public DatePicker datePicker;
 
+    /**
+     * Initializes Time, Contact, and Customer Combo Boxes
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimeComboBox();
@@ -59,6 +64,9 @@ public class AddAppointments implements Initializable {
         setupCustomerUserComboBox();
     }
 
+    /**
+     * Sets up the time combo boxes
+     */
     //sets up hours
     public void setupTimeComboBox(){
         hours.setAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
@@ -70,18 +78,30 @@ public class AddAppointments implements Initializable {
         endMinComboBox.setItems(minutes);
     }
 
+    /**
+     * Sets up the contact combo boxes
+     */
     //sets up contact combo box
     public void setupContactComboBox(){
         comboBoxContact.setItems(DBContacts.getAllContacts());
         comboBoxContact.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Sets up the Customer and User Combo Boxes
+     */
     //sets up user combo box
     public void setupCustomerUserComboBox(){
         userIdComboBox.setItems(DBUser.getAllUsers());
         customerIdComboBox.setItems(DBCustomer.getAllCustomerId());
     }
 
+    /**
+     * On save button click appointmentSaveButton() gets triggered
+     * It grabs all the form data -> error checks -> time conversions -> saves in DB
+     * @param actionEvent
+     * @throws IOException
+     */
     //save button functionality
     public void appointmentSaveButton(ActionEvent actionEvent) throws IOException {
         String title = appointmentTitle.getText();
@@ -94,8 +114,8 @@ public class AddAppointments implements Initializable {
         String endHourTime = (String) endHourComboBox.getValue();
         String startMinTime = (String) startMinComboBox.getValue();
         String endMinTime = (String) endMinComboBox.getValue();
-        String customerId = (String) customerIdComboBox.getValue();
-        String userId = (String) userIdComboBox.getValue();
+        Integer customerId = (Integer) customerIdComboBox.getValue();
+        Integer userId = (Integer) userIdComboBox.getValue();
         String errMsg = "";
 
         if(title == ""){ errMsg+="Missing title\n"; }
@@ -120,40 +140,97 @@ public class AddAppointments implements Initializable {
             }
             appointmentId.setText(String.valueOf(++idCounter));
 
-            //get LocalDateTime
+            // Start Time
+            //get LocalDateTime (User time)
             LocalDateTime startLocalDT = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),
                     Integer.parseInt(startHourTime), Integer.parseInt(startMinTime));
+            ZonedDateTime starting = ZonedDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 8,0,
+                    0,0, ZoneId.of("America/New_York"));
+            String User = startLocalDT.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            //=============================
+            //      FIND USER'S ZONE
+            //=============================
+
+            LocalDateTime ldt = LocalDateTime.parse(User, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            System.out.println(ldt);
+
+            ZoneId UserZoneId = ZoneId.of(ZoneId.systemDefault().toString());
+            ZonedDateTime UserZonedDateTime = ldt.atZone(UserZoneId);
+            System.out.println("User Time: " + UserZonedDateTime);
+
+            //=============================================
+            // CONVERT USER'S ZONE TO UTC (ADD TO DATABASE)
+            //=============================================
+
+            ZoneId UTCZoneId = ZoneId.of("UTC");
+            ZonedDateTime UTCZonedDateTime = UserZonedDateTime.withZoneSameInstant(UTCZoneId);
+            System.out.println("Date (UTC) : " + UTCZonedDateTime);
+
+            //====================================================
+            // CONVERT USER'S ZONE TO EST (COMPARE BUSINESS HOURS)
+            //====================================================
+
+            ZoneId ESTZoneId = ZoneId.of("America/New_York");
+            ZonedDateTime ESTDateTime = UTCZonedDateTime.withZoneSameInstant(ESTZoneId);
+            System.out.println("Date (EST) : " + ESTDateTime);
+
+
+
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            System.out.println("\n---DateTimeFormatter---");
+            System.out.println("Date (User Zone) : " + format.format(UserZonedDateTime));
+            System.out.println("Date (UTC) : " + format.format(UTCZonedDateTime));
+            System.out.println("Date (EST) : " + format.format(ESTDateTime));
+
+            // End Time
+            //get LocalDateTime (User time)
             LocalDateTime endLocalDT = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),
                     Integer.parseInt(endHourTime), Integer.parseInt(endMinTime));
-
-            //get ZoneDateTime for EST
-            ZonedDateTime startEST = ZonedDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 8,0,
+            ZonedDateTime closing = ZonedDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 22,0,
                     0,0, ZoneId.of("America/New_York"));
-            ZonedDateTime endEST = ZonedDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 22,0,
-                    0,0, ZoneId.of("America/New_York"));
+            String UserEnd = endLocalDT.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-            //get ZDT for UTC
-            ZonedDateTime startUTC = startEST.withZoneSameInstant(ZoneOffset.UTC);
-            ZonedDateTime endUTC = endEST.withZoneSameInstant(ZoneOffset.UTC);
+            //=============================
+            //      FIND USER'S ZONE
+            //=============================
 
-            //get UTC to Local
-            LocalTime utcToStartLocal = startUTC.toLocalDateTime().toLocalTime();
-            LocalTime utcToEndLocal = endUTC.toLocalDateTime().toLocalTime();
+            LocalDateTime ldtEnd = LocalDateTime.parse(UserEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            System.out.println(ldtEnd);
 
-            //get ZDT of LDT
-            ZonedDateTime startZDT = ZonedDateTime.of(startLocalDT, ZoneId.systemDefault());
-            ZonedDateTime endZDT = ZonedDateTime.of(endLocalDT, ZoneId.systemDefault());
+            ZoneId UserZoneIdEnd = ZoneId.of(ZoneId.systemDefault().toString());
+            ZonedDateTime UserZonedDateTimeEnd = ldtEnd.atZone(UserZoneIdEnd);
+            System.out.println("User Time: " + UserZonedDateTimeEnd);
 
-            //get UTC ZDT of LDT
-            ZonedDateTime startUTCZDT = startZDT.withZoneSameInstant(ZoneOffset.UTC);
-            ZonedDateTime endUTCZDT = endZDT.withZoneSameInstant(ZoneOffset.UTC);
+            //=============================================
+            // CONVERT USER'S ZONE TO UTC (ADD UTCZonedDateTimeEnd TO DATABASE)
+            //=============================================
 
-            //get sql timestamp
-            Timestamp startTS = Timestamp.from(Instant.from(startUTCZDT));
-            Timestamp endTS = Timestamp.from(Instant.from(endUTCZDT));
+            ZoneId UTCZoneIdEnd = ZoneId.of("UTC");
+            ZonedDateTime UTCZonedDateTimeEnd = UserZonedDateTimeEnd.withZoneSameInstant(UTCZoneIdEnd);
+            System.out.println("Date (UTC) : " + UTCZonedDateTimeEnd);
 
-            if (startUTCZDT.isBefore(startUTC) ||
-                endUTCZDT.isAfter(endUTC)){
+            //====================================================
+            // CONVERT USER'S ZONE TO EST (COMPARE userDateTimeEnd BUSINESS HOURS)
+            //====================================================
+
+            ZoneId ESTZoneIdEnd = ZoneId.of("America/New_York");
+            ZonedDateTime ESTDateTimeEnd = UTCZonedDateTimeEnd.withZoneSameInstant(ESTZoneIdEnd);
+            System.out.println("Date (EST) : " + ESTDateTimeEnd);
+
+            System.out.println("\n---DateTimeFormatter---");
+            System.out.println("Date (User Zone) : " + format.format(UserZonedDateTimeEnd));
+            System.out.println("Date (UTC) : " + format.format(UTCZonedDateTimeEnd));
+            System.out.println("Date (EST) : " + format.format(ESTDateTimeEnd));
+
+            //====================================================
+            // CONVERT TO ZDT TO TIMESTAMP
+            //====================================================
+            Timestamp startTimestamp = Timestamp.valueOf(format.format(UTCZonedDateTime));
+            Timestamp endTimestamp = Timestamp.valueOf(format.format(UTCZonedDateTimeEnd));
+
+            if (ESTDateTime.isBefore(starting) ||
+                    ESTDateTimeEnd.isAfter(closing)){
                 Alert alertUser = new Alert(Alert.AlertType.ERROR, "Please choose a time slot between 8am and 10pm " +
                         "EST");
                 alertUser.showAndWait();
@@ -166,10 +243,10 @@ public class AddAppointments implements Initializable {
                 appointment.setAppointmentLocation(location);
                 appointment.setAppointmentContact(contact);
                 appointment.setAppointmentType(type);
-                appointment.setAppointmentStartTime(startTS);
-                appointment.setAppointmentEndTime(endTS);
-                appointment.setAppointmentCustomerId(Integer.valueOf(customerId));
-                appointment.setUserId(Integer.valueOf(userId));
+                appointment.setAppointmentStartTime(startTimestamp);
+                appointment.setAppointmentEndTime(endTimestamp);
+                appointment.setAppointmentCustomerId(customerId);
+                appointment.setUserId(userId);
 
                 if(dbAppt.checkIfOverlap(appointment)){
                     Alert alert = new Alert(Alert.AlertType.ERROR, "An appointment at the given time already exists.");
@@ -186,6 +263,11 @@ public class AddAppointments implements Initializable {
         }
     }
 
+    /**
+     * Customer Cancel Button cancels the action required.
+     * @param actionEvent
+     * @throws IOException
+     */
     //cancel button functionality
     public void customerCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
@@ -199,6 +281,11 @@ public class AddAppointments implements Initializable {
         }
     }
 
+    /**
+     * Log out button logs the user out.
+     * @param actionEvent
+     * @throws IOException
+     */
     //logout button functionality
     public void logOutButton(ActionEvent actionEvent) throws IOException {
         Alert alertUser = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
