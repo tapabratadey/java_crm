@@ -120,6 +120,7 @@ public class ContactSchedule implements Initializable {
                     "appointments.Customer_ID = customers.Customer_ID and\n" +
                     "appointments.Contact_ID = contacts.Contact_ID and\n" +
                     "appointments.User_ID = users.User_ID";
+            System.out.println(sql);
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -131,6 +132,7 @@ public class ContactSchedule implements Initializable {
                 appointment.setAppointmentDescription(rs.getString("Description"));
                 appointment.setAppointmentStartTime(rs.getTimestamp("Start"));
                 appointment.setAppointmentEndTime(rs.getTimestamp("End"));
+                appointment.setAppointmentCustomerId(rs.getInt("Customer_ID"));
                 appointmentsList.add(appointment);
             }
         }
