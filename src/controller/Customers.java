@@ -55,7 +55,7 @@ public class Customers implements Initializable {
      * Sets up the customer table
      */
     //sets up customer table
-    //lambda expression
+    //LAMBDA expression
     public void setupCustomer(){
         DBCustomer customer = new DBCustomer();
         customerTable.setItems(customer.getAllCustomers());

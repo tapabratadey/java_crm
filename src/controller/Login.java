@@ -38,6 +38,7 @@ public class Login implements Initializable {
     public Label loginHeader;
     public Label getZone;
     public Label zoneLabel;
+    Locale aLocale;
 
     /**
      * Initializes Login fields and sets up the ResourceBundle package
@@ -46,10 +47,16 @@ public class Login implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Locale.setDefault(Locale.FRENCH);
         ResourceBundle userLang;
-        Locale currSystem = Locale.getDefault();
-        userLang = ResourceBundle.getBundle("resourceBundle", currSystem);
+//        Locale.setDefault(Locale.FRENCH);
+        aLocale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
+        userLang = ResourceBundle.getBundle("resourceBundle", aLocale);
+
+
+//        Locale currSystem = Locale.getDefault();
+//        userLang = ResourceBundle.getBundle("resourceBundle", currSystem);
+
+
         welcomeMsg.setText(userLang.getString("welcomeMsg"));
         usernameTextLabel.setText(userLang.getString("username"));
         passwordTextLabel.setText(userLang.getString("password"));
@@ -77,36 +84,40 @@ public class Login implements Initializable {
      * @throws IOException
      */
     //login button functionality
-    public void loginButton(ActionEvent actionEvent) throws IOException {
+        public void loginButton(ActionEvent actionEvent) throws IOException {
+            String username = usernameText.getText();
+            String password = passwordText.getText();
+            boolean isLogged = tryLogin(username, password);
+            if (isLogged){
+                loggedUser = username;
+                System.out.println("User: " + loggedUser + " logged in.");
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
+                Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setTitle("Dashboard");
+                stage.setScene(scene);
+                stage.show();
+                userLogInTracker(loggedUser, true);
+            }else{
+                if (aLocale != null && aLocale.toString().equals("fr_FR")){
+                    Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
+                    alertUser.showAndWait();
+                    userLogInTracker(username, false);
+                }else{
+                    if (Locale.getDefault().toString().equals("en_US")){
+                        Alert alertUser = new Alert(Alert.AlertType.ERROR, "Wrong username or password.");
+                        alertUser.showAndWait();
+                        userLogInTracker(username, false);
+                    }
+                    if (Locale.getDefault().toString().equals("fr") || Locale.getDefault().toString().equals("fr_FR")){
+                        Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
+                        alertUser.showAndWait();
+                        userLogInTracker(username, false);
+                    }
+                }
 
-        String username = usernameText.getText();
-        String password = passwordText.getText();
-        boolean isLogged = tryLogin(username, password);
-        if (isLogged){
-            loggedUser = username;
-            System.out.println("User: " + loggedUser + " logged in.");
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Dashboard.fxml")));
-            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setTitle("Dashboard");
-            stage.setScene(scene);
-            stage.show();
-            userLogInTracker(loggedUser, true);
-        }else{
-            System.out.println("login failed");
-            if (Locale.getDefault().toString().equals("en_US")){
-                Alert alertUser = new Alert(Alert.AlertType.ERROR, "Wrong username or password.");
-                alertUser.showAndWait();
-                userLogInTracker(username, false);
-            }
-            if (Locale.getDefault().toString().equals("fr")){
-                System.out.println("kasdf");
-                Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
-                alertUser.showAndWait();
-                userLogInTracker(username, false);
             }
         }
-    }
 
     /**
      * Checks if the user credentials are valid or not

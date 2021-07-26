@@ -28,7 +28,7 @@ public class DBConnection {
             Class.forName(MYSQLJBCDriver);
             conn = DriverManager.getConnection(jdbcURL, username, pass);
             /**
-             * Lambda Expression
+             * LAMBDA EXPRESSION
              */
             new Thread(() -> System.out.println("Connected to DB!")).start();
         }catch(SQLException e) {
