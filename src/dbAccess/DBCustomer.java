@@ -85,20 +85,15 @@ public class DBCustomer {
     public void modifyCustomer(Customer customer){
         try{
             String sql = "update " +
-                    "customers, " +
-                    "first_level_divisions, " +
-                    "countries " +
+                    "customers " +
                     "SET " +
                     "Customer_Name = \"" + customer.getName() + "\", " +
                     "Address = \"" + customer.getAddress() + "\", " +
                     "Postal_Code = \"" + customer.getPostalCode() + "\", " +
-                    "Phone = \"" + customer.getPhoneNumber() + "\"," +
-                    "first_level_divisions.Division = \"" +customer.getDivision()+ "\", " +
-                    "countries.Country = \"" + customer.getCountry() + "\" " +
+                    "Phone = \"" + customer.getPhoneNumber() + "\", " +
+                    "Division_ID = (select Division_ID from first_level_divisions where Division = \"" +customer.getDivision()+ "\") " +
                     "where " +
-                    "customers.Division_ID = first_level_divisions.Division_ID " +
-                    "and countries.Country_ID = first_level_divisions.Country_ID " +
-                    "and customers.Customer_ID = \"" + customer.getId() + "\" ";
+                    "customers.Customer_ID = \"" + customer.getId() + "\" ";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ps.executeUpdate();
         }catch(SQLException e){

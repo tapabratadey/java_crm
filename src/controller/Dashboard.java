@@ -140,7 +140,6 @@ public class Dashboard implements Initializable {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             LocalDateTime timeNow = LocalDateTime.now();
-            System.out.println(rs.next());
             if (rs.next() == false){
                 appointmentAlert.setText("No upcoming appointments.");
             }

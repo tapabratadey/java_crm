@@ -100,7 +100,6 @@ public class Login implements Initializable {
                 userLogInTracker(loggedUser, true);
             }else{
                 if (aLocale != null && aLocale.toString().equals("fr_FR")){
-                    System.out.println("HERE");
                     Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
                     alertUser.showAndWait();
                     userLogInTracker(username, false);
