@@ -15,6 +15,10 @@ import java.sql.SQLException;
  */
 
 public class DBUser {
+    /**
+     * Get's a list of all user id
+     * @return List of All Users
+     */
     public static ObservableList getAllUsers() {
         ObservableList<Integer> usersList = FXCollections.observableArrayList();
         try{

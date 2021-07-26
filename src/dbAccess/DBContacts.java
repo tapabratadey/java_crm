@@ -12,9 +12,14 @@ import java.sql.SQLException;
 
 /**
  * Database queries related to Contacts
+ *
  */
 
 public class DBContacts {
+    /**
+     * queries and returns all contacts.
+     * @return ObserverableList<String> list of contacts
+     */
     public static ObservableList<String> getAllContacts() {
         ObservableList<String> contactsList = FXCollections.observableArrayList();
         try {

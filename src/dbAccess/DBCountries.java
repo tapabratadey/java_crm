@@ -14,7 +14,10 @@ import java.sql.*;
  */
 
 public class DBCountries {
-    //gets all countries
+    /**
+     * Gets list of all countries
+     * @return List of all Countries
+     */
     public static ObservableList<String> getAllCountries(){
         ObservableList<String> countryList = FXCollections.observableArrayList();
         try{
@@ -35,7 +38,7 @@ public class DBCountries {
 
     /**
      * Gets all US states
-     * @return
+     * @return List of US Regions
      */
     //gets all US states
     public static ObservableList<String> getUSRegions(){
@@ -57,9 +60,8 @@ public class DBCountries {
 
     /**
      * Gets all UK Regions
-     * @return
+     * @return List of UK Regions
      */
-    //gets all UK Regions
     public static ObservableList<String> getUKRegions(){
         ObservableList<String> divisionList = FXCollections.observableArrayList();
         try{
@@ -79,7 +81,7 @@ public class DBCountries {
 
     /**
      * Gets all Canada's Regions
-     * @return
+     * @return List of Ca Regions
      */
     //gets all CA Regions
     public static ObservableList<String> getCARegions(){

@@ -2,6 +2,13 @@ package model;
 
 /**
  * Country Class
+ * Country class holds:
+ * 1. Country Id
+ * 2. Country Name
+ * 3. Country Division Id
+ * 4. Country Division
+ * 5. Setter functions
+ * 6. Getter functions
  */
 
 public class Country {

@@ -21,6 +21,11 @@ import java.util.TimeZone;
 
 public class DBAppointments {
     // queries all appointments
+
+    /**
+     * returns list of appointments by customer id, user id, and contact id
+     * @return {ObservableList<Appointment>}
+     */
     public static ObservableList<Appointment> getAppointments(){
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         try{
@@ -102,7 +107,7 @@ public class DBAppointments {
     }
 
     /**
-     * Deletes the Appointments
+     * Deletes the Appointments by appointment id
      * @param appointment
      */
     //queries to delete appointments
@@ -121,7 +126,7 @@ public class DBAppointments {
     }
 
     /**
-     * Checks if appointments overlap or not
+     * Checks if appointments overlap or not between start and end times
      * @param appointment
      * @return
      */
@@ -183,7 +188,7 @@ public class DBAppointments {
     }
 
     /**
-     * Updates Appointments
+     * Updates Appointments by appointment id
      * @param appointment
      */
     //updates an appointment
@@ -212,7 +217,7 @@ public class DBAppointments {
     }
 
     /**
-     * Retrieves monthly appointments
+     * Retrieves monthly appointments by customer id, user id, and contact id
      * @param month
      * @param year
      * @return
@@ -283,7 +288,7 @@ public class DBAppointments {
     }
 
     /**
-     * Retrieves weekly appointments
+     * Retrieves weekly appointments by customer id, user id, and contact id
      * @param weekNumber
      * @param year
      * @return

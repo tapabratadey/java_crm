@@ -13,6 +13,11 @@ import java.sql.*;
 
 public class DBCustomer {
     //gets all customers
+
+    /**
+     * Queries customers by division id, and country id
+     * @return List of all customers
+     */
     public static ObservableList<Customer> getAllCustomers(){
         ObservableList<Customer> customersList = FXCollections.observableArrayList();
         try{
@@ -50,7 +55,7 @@ public class DBCustomer {
 
     /**
      * Gets all customer Ids
-     * @return
+     * @return List of all Customer Ids
      */
     //gets all customer ids
     public static ObservableList<Integer> getAllCustomerId(){

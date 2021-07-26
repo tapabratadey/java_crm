@@ -2,6 +2,17 @@ package model;
 
 /**
  * Customer Class
+ * Customer Class holds:
+ * 1. Customer id
+ * 2. Customer name
+ * 3. Customer address
+ * 4. Customer postal code
+ * 5. Customer phone number
+ * 6. Customer division
+ * 7. Customer division Id
+ * 8. Customer country
+ * 9. Setter functions
+ * 10. Getter functions
  */
 
 public class Customer {

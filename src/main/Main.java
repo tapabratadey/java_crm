@@ -11,6 +11,8 @@ import java.util.Objects;
 
 /**
  * Main: Application Entry point
+ * main starts the database connection
+ * start loads the login screen
  */
 public class Main extends Application {
 

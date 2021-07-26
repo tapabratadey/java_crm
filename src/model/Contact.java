@@ -2,6 +2,12 @@ package model;
 
 /**
  * Contacts Class
+ * Contact class holds:
+ * 1. Contact Name
+ * 2. Contact Id
+ * 3. Contact Email
+ * 4. Setter functions
+ * 5. Getter functions
  */
 
 public class Contact {

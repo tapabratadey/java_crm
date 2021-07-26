@@ -2,6 +2,12 @@ package model;
 
 /**
  * User Class
+ * User class holds:
+ * 1. User Id
+ * 2. User Name
+ * 3. User Password
+ * 4. Setter Functions
+ * 5. Getter Functions
  */
 
 public class User {

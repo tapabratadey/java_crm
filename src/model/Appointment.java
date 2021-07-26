@@ -15,6 +15,22 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Appointment Class
+ * Appointment holds:
+ * 1. id
+ * 2. title
+ * 3. appointment description
+ * 4. appointment location
+ * 5. appointment contact
+ * 6. appointment type
+ * 7. appointment start time
+ * 8. appointment end time
+ * 9. appointment customer id
+ * 10. contact id
+ * 11. user id
+ * 12. start zone time
+ * 13. end zone time
+ * 14. Setter functions
+ * 15. Getter functions
  */
 
 public class Appointment {

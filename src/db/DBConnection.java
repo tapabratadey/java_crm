@@ -42,7 +42,7 @@ public class DBConnection {
     /**
      * Closes the DB connection
      */
-    //lambda expression
+    //LAMBDA expression
     public static void closeConnection(){
         try{
             conn.close();
