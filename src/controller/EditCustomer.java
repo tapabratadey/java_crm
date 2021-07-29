@@ -54,7 +54,10 @@ public class EditCustomer implements Initializable {
 
     /**
      * Sets up the country combo boxes
-     * LAMBDA
+     * LAMBDA EXPRESSION
+     * Justification: I chose to use Lambda Expression here because
+     * it let me use the callback value efficiently to check for
+     * country strings.
      */
     // sets up country combo box
     public void setupComboBox(){

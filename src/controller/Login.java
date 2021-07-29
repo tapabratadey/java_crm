@@ -38,7 +38,8 @@ public class Login implements Initializable {
     public Label loginHeader;
     public Label getZone;
     public Label zoneLabel;
-    Locale aLocale;
+    Locale currSystem = Locale.getDefault();
+    ResourceBundle userLang;
 
     /**
      * Initializes Login fields and sets up the ResourceBundle package
@@ -47,22 +48,13 @@ public class Login implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ResourceBundle userLang;
-//        Locale.setDefault(Locale.FRENCH);
-        aLocale = new Locale.Builder().setLanguage("fr").setRegion("FR").build();
-        userLang = ResourceBundle.getBundle("resourceBundle", aLocale);
-
-
-//        Locale currSystem = Locale.getDefault();
-//        userLang = ResourceBundle.getBundle("resourceBundle", currSystem);
-
-
-        welcomeMsg.setText(userLang.getString("welcomeMsg"));
-        usernameTextLabel.setText(userLang.getString("username"));
-        passwordTextLabel.setText(userLang.getString("password"));
-        loginButton.setText(userLang.getString("loginButton"));
-        loginHeader.setText(userLang.getString("loginHeader"));
-        zoneLabel.setText(userLang.getString("zone"));
+        this.userLang = ResourceBundle.getBundle("resourceBundle", currSystem);
+        welcomeMsg.setText(this.userLang.getString("welcomeMsg"));
+        usernameTextLabel.setText(this.userLang.getString("username"));
+        passwordTextLabel.setText(this.userLang.getString("password"));
+        loginButton.setText(this.userLang.getString("loginButton"));
+        loginHeader.setText(this.userLang.getString("loginHeader"));
+        zoneLabel.setText(this.userLang.getString("zone"));
         getZone.setText(findZone());
     }
 
@@ -99,23 +91,11 @@ public class Login implements Initializable {
                 stage.show();
                 userLogInTracker(loggedUser, true);
             }else{
-                if (aLocale != null && aLocale.toString().equals("fr_FR")){
-                    Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
-                    alertUser.showAndWait();
-                    userLogInTracker(username, false);
-                }else{
-                    if (Locale.getDefault().toString().equals("en_US")){
-                        Alert alertUser = new Alert(Alert.AlertType.ERROR, "Wrong username or password.");
-                        alertUser.showAndWait();
-                        userLogInTracker(username, false);
-                    }
-                    if (Locale.getDefault().toString().equals("fr") || Locale.getDefault().toString().equals("fr_FR")){
-                        Alert alertUser = new Alert(Alert.AlertType.ERROR, "Mauvais nom d'utilisateur ou mot de passe.");
-                        alertUser.showAndWait();
-                        userLogInTracker(username, false);
-                    }
-                }
-
+                Alert alertUser = new Alert(Alert.AlertType.WARNING);
+                alertUser.setTitle(this.userLang.getString("failedLoginTitle"));
+                alertUser.setHeaderText(this.userLang.getString("failedLoginText"));
+                alertUser.showAndWait();
+                userLogInTracker(username, false);
             }
         }
 

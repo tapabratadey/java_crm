@@ -29,6 +29,15 @@ public class DBConnection {
             conn = DriverManager.getConnection(jdbcURL, username, pass);
             /**
              * LAMBDA EXPRESSION
+             * Justification: I chose to use Lambda Expressing here because
+             * it let me use thread instance's start method more compactly
+             * in one liner. Or else I would have had to write it as:
+             * Thread thread = new Thread(){
+             *     public void run(){
+             *       System.out.println("Thread Running");
+             *     }
+             *   }
+             * thread.start();
              */
             new Thread(() -> System.out.println("Connected to DB!")).start();
         }catch(SQLException e) {
@@ -41,8 +50,12 @@ public class DBConnection {
 
     /**
      * Closes the DB connection
+     * LAMBDA EXPRESSION
+     * Justification: I chose to use LAMBDA expression (e.getMessage) to print
+     * the Exception. It will get the description of the exception.
+     *
      */
-    //LAMBDA expression
+    //
     public static void closeConnection(){
         try{
             conn.close();
